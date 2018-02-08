@@ -1,12 +1,4 @@
 
-const NULL_STRING =  'null';
-
-var which_key_pressed = NULL_STRING;
-
-let space_pressed = false;
-
-let wsad = ["w","s","a","d"];
-
 document.addEventListener('keydown', (event) => {
 
     for(let i=0; i<wsad.length; i++)
