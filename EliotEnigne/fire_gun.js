@@ -1,13 +1,37 @@
 class Bullet {
     constructor(x_position,y_position,color,speed)
     {
-        this.BULLET_WIDTH = 4;
-        this.BULLET_HIGHT = 8;
+        this.BULLET_WIDTH = 6;
+        this.BULLET_HIGHT = 10;
 
         this.x_position = x_position;
         this.y_position = y_position;
         this.color = color;
         this.speed =speed;
+        this.disappear = false;
+
+    }
+
+    check_bullet_collision(board)
+    {
+        let m = this.x_position / 32;
+        m = Math.floor(m);
+        let n = this.y_position / 32;
+        n = Math.floor(n);
+        let chunk = board[n][m];
+
+        console.log(chunk);
+        console.log(chunk.size);
+        console.log(chunk.collison);
+
+        if(chunk.collison===1)
+            this.disappear=true;
+
+        if(chunk.collison===2)
+        {
+            //EliotEngine.destory_block(chunk);
+            this.disappear=true;
+        }
 
     }
 
@@ -37,15 +61,23 @@ class Fire_gun {
         this.bullets.push(bullet);
     }
 
-    update_bullets(canvas) {
+    update_bullets(canvas,board) {
 
-
-
+        let new_bullets = [];
         for (let i = 0; i < this.bullets.length; i++) {
-            this.bullets[i].update();
-            this.bullets[i].draw(canvas);
+
+            let bullet = this.bullets[i];
+            bullet.check_bullet_collision(board);
+
+            if(!bullet.disappear)
+            {
+                bullet.update();
+                bullet.draw(canvas);
+                new_bullets.push(bullet);
+            }
 
         }
+        this.bullets = new_bullets;
     }
 }
 

@@ -17,9 +17,9 @@ class hero {
         canvas.drawImage(this.texture,this.x_position,this.y_position); //POPRAWIĆ I PRZENIEŚĆ DO GŁÓWNEJ KLASY
     }
 
-    update_fire_gun(canvas)
+    update_fire_gun(canvas,board)
     {
-        this.fire_gun.update_bullets(canvas);
+        this.fire_gun.update_bullets(canvas,board);
     }
 
     check_if_fire()

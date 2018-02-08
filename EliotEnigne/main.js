@@ -11,7 +11,13 @@ class Chunk{
 
     check_collision(point)
     {
-        return (point.x >= this.x_position && point.x <= this.x_position+this.size) && (point.y >= this.y_position && point.y <= this.y_position+this.size)
+        return (point.x > this.x_position && point.x < this.x_position+this.size) && (point.y > this.y_position && point.y < this.y_position+this.size)
+    }
+
+    change_to_background(texture)
+    {
+        this.texture = texture;
+        this.collison=0;
     }
 
     // get left_up_point(){return new Point(this.x_position,this.y_position);}
@@ -52,6 +58,7 @@ class EliotEngine {
 
 
         this.texture_pack = new Array(this.TEXTURE_PACK_SIZE);
+        this.block_to_destory = new Array(0);
 
         let chunks_in_y = this.CANVAS_HEIGHT/chunk_size;
         this.board = new Array(chunks_in_y);
@@ -64,12 +71,17 @@ class EliotEngine {
 
         this.hero = null;
         this.hero_chunk = null;
+    }
+
+    static destory_block(chunk)
+    {
 
 
     }
 
     start_engine(){
 
+        this.block_to_destory = new Array(0);
 
         this.load_textures();
         this.generate_board();
@@ -104,7 +116,11 @@ class EliotEngine {
         let hero_render = () => {
             this.game.clearRect(0,0,this.CANVAS_WIGTH,this.CANVAS_HEIGHT);
             this.hero.render_hero(this.game);
-            this.hero.update_fire_gun(this.game);
+            this.hero.update_fire_gun(this.game,this.board);;
+        };
+
+        let board = () => {
+          this.update_board()
         };
 
 
@@ -112,10 +128,26 @@ class EliotEngine {
         setInterval(function() {
             hero_move();
             hero_render();
+            board();
         }, 1000/FPS);
 
 
     }
+
+    update_board()
+    {
+        for(let i=0; i<this.block_to_destory.length; i++)
+        {
+            let chunk = this.block_to_destory[i];
+            chunk.change_to_background(this.texture_pack[0]);
+            //chunk.change_to_background(this.texture_pack[0]);
+            this.draw_chunk(chunk);
+        }
+
+        this.block_to_destory = new Array(0);
+    }
+
+
 
 
     update_hero_chunk(neighbourhood)
@@ -198,6 +230,12 @@ class EliotEngine {
             y_position+=this.CHUNK_SIZE;
 
         }
+    }
+
+    draw_chunk(chunk)
+    {
+        this.background.clearRect(chunk.x_position,chunk.y_position,this.CHUNK_SIZE,this.CHUNK_SIZE);
+        this.background.drawImage(chunk.texture,chunk.x_position,chunk.y_position);
     }
 
 
