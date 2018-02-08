@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b9e2c372-e4ba-4e4e-a827-3259e120422b" name="Default" comment="renderowanie action board works">
-      <change beforePath="" afterPath="$PROJECT_DIR$/EliotEnigne/board.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EliotEnigne/collision_manager.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/EliotEnigne/game_render.js" />
+    <list default="true" id="b9e2c372-e4ba-4e4e-a827-3259e120422b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/EliotEnigne/eliot_engine_main_class.js" afterPath="$PROJECT_DIR$/EliotEnigne/eliot_engine_main_class.js" />
+      <change beforePath="$PROJECT_DIR$/EliotEnigne/fire_gun.js" afterPath="$PROJECT_DIR$/EliotEnigne/fire_gun.js" />
+      <change beforePath="$PROJECT_DIR$/EliotEnigne/game_render.js" afterPath="$PROJECT_DIR$/EliotEnigne/game_render.js" />
       <change beforePath="$PROJECT_DIR$/EliotEnigne/hero.js" afterPath="$PROJECT_DIR$/EliotEnigne/hero.js" />
-      <change beforePath="$PROJECT_DIR$/EliotEnigne/map_temp.js" afterPath="$PROJECT_DIR$/EliotEnigne/map_temp.js" />
-      <change beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change beforePath="$PROJECT_DIR$/test.js" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -44,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="eliot_engine_main_class.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="eliot_engine_main_class.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EliotEnigne/eliot_engine_main_class.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="62" column="31" lean-forward="false" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
+            <state relative-caret-position="137">
+              <caret line="63" column="45" lean-forward="true" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -67,8 +63,8 @@
       <file leaf-file-name="game_render.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EliotEnigne/game_render.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="82" lean-forward="false" selection-start-line="19" selection-start-column="82" selection-end-line="19" selection-end-column="82" />
+            <state relative-caret-position="391">
+              <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -94,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fire_gun.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="fire_gun.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/EliotEnigne/fire_gun.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state relative-caret-position="426">
+              <caret line="60" column="29" lean-forward="true" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -117,8 +113,8 @@
       <file leaf-file-name="hero.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EliotEnigne/hero.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="71" column="67" lean-forward="false" selection-start-line="71" selection-start-column="67" selection-end-line="71" selection-end-column="67" />
+            <state relative-caret-position="136">
+              <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -152,16 +148,16 @@
       <list>
         <option value="$PROJECT_DIR$/test.js" />
         <option value="$PROJECT_DIR$/EliotEnigne/fireGun.js" />
-        <option value="$PROJECT_DIR$/EliotEnigne/fire_gun.js" />
         <option value="$PROJECT_DIR$/EliotEnigne/events.js" />
         <option value="$PROJECT_DIR$/EliotEnigne/main.js" />
-        <option value="$PROJECT_DIR$/EliotEnigne/game_render.js" />
         <option value="$PROJECT_DIR$/EliotEnigne/collision_manager.js" />
         <option value="$PROJECT_DIR$/EliotEnigne/board.js" />
         <option value="$PROJECT_DIR$/EliotEnigne/map_temp.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/EliotEnigne/game_render.js" />
         <option value="$PROJECT_DIR$/EliotEnigne/hero.js" />
         <option value="$PROJECT_DIR$/EliotEnigne/eliot_engine_main_class.js" />
+        <option value="$PROJECT_DIR$/EliotEnigne/fire_gun.js" />
       </list>
     </option>
   </component>
@@ -281,7 +277,7 @@
       <workItem from="1517243238312" duration="4000" />
       <workItem from="1517312598322" duration="12798000" />
       <workItem from="1517354405341" duration="8497000" />
-      <workItem from="1517913365381" duration="38970000" />
+      <workItem from="1517913365381" duration="40055000" />
     </task>
     <task id="LOCAL-00001" summary="działa kolizja ! działa prototypowe strzelanie">
       <created>1517944455731</created>
@@ -304,11 +300,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518111349578</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="collision works properly !">
+      <created>1518119136575</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1518119136575</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73727000" />
+    <option name="totallyTimeSpent" value="74812000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
@@ -371,7 +374,8 @@
     <MESSAGE value="wydzielone EliotEngingne class" />
     <MESSAGE value="generowanie planszy działa" />
     <MESSAGE value="renderowanie action board works" />
-    <option name="LAST_COMMIT_MESSAGE" value="renderowanie action board works" />
+    <MESSAGE value="collision works properly !" />
+    <option name="LAST_COMMIT_MESSAGE" value="collision works properly !" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -584,30 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EliotEnigne/collision_manager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EliotEnigne/fire_gun.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EliotEnigne/game_render.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="82" lean-forward="false" selection-start-line="19" selection-start-column="82" selection-end-line="19" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/EliotEnigne/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -640,18 +620,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EliotEnigne/hero.js">
+    <entry file="file://$PROJECT_DIR$/EliotEnigne/collision_manager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="71" column="67" lean-forward="false" selection-start-line="71" selection-start-column="67" selection-end-line="71" selection-end-column="67" />
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EliotEnigne/game_render.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EliotEnigne/eliot_engine_main_class.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="62" column="31" lean-forward="false" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
+        <state relative-caret-position="137">
+          <caret line="63" column="45" lean-forward="true" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EliotEnigne/hero.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EliotEnigne/fire_gun.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="60" column="29" lean-forward="true" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
           <folding />
         </state>
       </provider>

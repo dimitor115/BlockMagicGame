@@ -13,9 +13,9 @@ class hero {
 
     }
 
-    update_fire_gun(canvas,board)
+    update_fire_gun(render,board)
     {
-        this.fire_gun.update_bullets(canvas,board);
+        this.fire_gun.update_bullets(render,board);
     }
 
     check_if_fire()

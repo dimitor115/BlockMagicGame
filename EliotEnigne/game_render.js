@@ -19,4 +19,15 @@ class Game_render{
 
         this.Action_board.drawImage(hero.texture,hero.x_position,hero.y_position);
     }
+
+    render_bullets(bullet)
+    {
+        this.Action_board.fillStyle = bullet.color;
+        this.Action_board.fillRect(bullet.x_position, bullet.y_position, bullet.BULLET_WIDTH, bullet.BULLET_HIGHT);
+    }
+
+    static test()
+    {
+        console.log(this.CANVAS_HEIGHT);
+    }
 }

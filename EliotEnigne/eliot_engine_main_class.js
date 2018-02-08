@@ -62,14 +62,15 @@ class EliotEngine {
         let FPS = 45;
         let hero_move = () => {
             this.hero.move(this.Board.Board);
-            //this.hero.check_if_fire();
+            this.hero.check_if_fire();
 
         };
-
+        let render_bullet =(bullet)=>{this.Game_render.render_bullets(bullet);};
         let hero_render = () => {
             this.Game_render.Action_board.clearRect(0,0,this.CANVAS_WIGTH,this.CANVAS_HEIGHT); //clear all action board CZEMU ?!
             this.Game_render.render_hero(this.hero);
-            //this.hero.update_fire_gun(this.game,this.board);;
+
+            this.hero.update_fire_gun(render_bullet,this.Board.Board);
         };
 
         let board = () => {

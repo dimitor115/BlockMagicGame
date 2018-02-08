@@ -40,11 +40,6 @@ class Bullet {
         this.y_position-=this.speed;
     }
 
-    draw(canvas)
-    {
-        canvas.fillStyle = this.color;
-        canvas.fillRect(this.x_position, this.y_position, this.BULLET_WIDTH, this.BULLET_HIGHT);
-    }
 
 }
 
@@ -61,7 +56,7 @@ class Fire_gun {
         this.bullets.push(bullet);
     }
 
-    update_bullets(canvas,board) {
+    update_bullets(render,board) {
 
         let new_bullets = [];
         for (let i = 0; i < this.bullets.length; i++) {
@@ -72,7 +67,7 @@ class Fire_gun {
             if(!bullet.disappear)
             {
                 bullet.update();
-                bullet.draw(canvas);
+                render(bullet);
                 new_bullets.push(bullet);
             }
 
