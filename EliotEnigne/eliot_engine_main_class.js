@@ -10,49 +10,28 @@ const wsad = ["w","s","a","d"];
 class EliotEngine {
 
 
-    constructor(canvas_wight, canvas_height, chunk_size, texture_pack_size, texture_format) {
+    constructor(canvas_wight, canvas_height, chunk_size) {
         this.CANVAS_WIGTH = canvas_wight;
         this.CANVAS_HEIGHT = canvas_height;
         this.CHUNK_SIZE = chunk_size;
-        this.TEXTURE_PACK_SIZE = texture_pack_size;
-        this.TEXTURE_FORMAT = texture_format;
 
         this.CHUNK_IN_Y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
         this.CHUNK_IN_X = this.CANVAS_WIGTH/this.CHUNK_SIZE;
 
-
-        this.texture_pack = new Array(this.TEXTURE_PACK_SIZE);
         this.block_to_destory = new Array(0);
 
-        let chunks_in_y = this.CANVAS_HEIGHT/chunk_size;
-        this.board = new Array(chunks_in_y);
-
-        const bg = document.getElementById("background-layer");
-        this.background = bg.getContext("2d");
-
-        const board = document.getElementById("game-layer");
-        this.game = board.getContext("2d");
-
+        this.Board = null;
         this.hero = null;
         this.hero_chunk = null;
-    }
 
-    static destory_block(chunk)
-    {
-
-
+        this.Game_render = new Game_render(this.CHUNK_IN_X,this.CHUNK_IN_Y);
     }
 
     start_engine(){
-
-        this.block_to_destory = new Array(0);
-
-        this.load_textures();
-        this.generate_board();
-        this.draw_board();
-        this.find_hero_chunk();
-        this.hero.render_hero(this.game);
-        this.hero_neighbourhood;
+        this.Board.draw_board();
+        //this.find_hero_chunk();
+        this.Game_render.render_hero(this.hero);
+        //this.hero_neighbourhood;
         this.main_loop();
 
     }
@@ -60,32 +39,44 @@ class EliotEngine {
     load_hero(img,wight,height,shift)
     {
         let fire_gun = new Fire_gun('red',24);
-
         let image = new Image();
         image.src = 'img/'+img;
         this.hero = new hero(image,wight,height,shift,fire_gun);
 
     }
 
+    load_board(texture_pack_size,texture_format)
+    {
+        let texture_pack = this.load_textures(texture_pack_size,texture_format);
+        let board = this.generate_board(texture_pack);
+
+        const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
+        const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
+        this.Board = new Board(board,chunk_in_x,chunk_in_y,texture_pack);
+
+
+    }
+
     main_loop(){
 
-        let FPS = 30;
+        let FPS = 45;
         let hero_move = () => {
-            let temp = this.hero_neighbourhood;
-            this.hero.move(temp);
-            this.hero.check_if_fire();
-            this.update_hero_chunk(temp);
+            this.hero.move(this.Board.Board);
+            //this.hero.check_if_fire();
+
         };
 
         let hero_render = () => {
-            this.game.clearRect(0,0,this.CANVAS_WIGTH,this.CANVAS_HEIGHT);
-            this.hero.render_hero(this.game);
-            this.hero.update_fire_gun(this.game,this.board);;
+            this.Game_render.Action_board.clearRect(0,0,this.CANVAS_WIGTH,this.CANVAS_HEIGHT); //clear all action board CZEMU ?!
+            this.Game_render.render_hero(this.hero);
+            //this.hero.update_fire_gun(this.game,this.board);;
         };
 
         let board = () => {
-            this.update_board()
+            //this.update_board()
         };
+
+        //let render =() =>{this.Game_render.render_action_board()};
 
 
 
@@ -97,6 +88,51 @@ class EliotEngine {
 
 
     }
+
+
+    load_textures(texture_pack_size,texture_format)
+    {
+        let texture_pack = new Array(texture_pack_size);
+        for(let i =0; i<texture_pack_size; i++)
+        {
+            let img= new Image();
+            console.log(img.src);
+            texture_pack[i] = img;
+            console.log("loaded texture nr:" + i);
+            img.src = 'img/' + i + texture_format;
+        }
+
+        return texture_pack;
+    }
+
+    generate_board(texture_pack){
+        const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
+        const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
+        let board = new Array(chunk_in_y);
+
+        let y_position = 0;
+        for(let i =0; i<chunk_in_y; i++) {
+
+            let one_level = new Array(chunk_in_x);
+            let x_position = 0;
+            for(let j=0; j<chunk_in_x; j++)
+            {
+                let x = map[i][j];
+                let texture = texture_pack[x];
+                one_level[j] = new Chunk(texture,x,x_position,y_position,this.CHUNK_SIZE);
+
+                x_position+=this.CHUNK_SIZE;
+            }
+
+            board[i] = one_level;
+            y_position+=this.CHUNK_SIZE;
+        }
+
+        return board;
+    }
+
+
+    //BORDER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     update_board()
     {
@@ -114,119 +150,7 @@ class EliotEngine {
 
 
 
-    update_hero_chunk(neighbourhood)
-    {
-        for(let i=0; i< neighbourhood.length; i++)
-        {
-            let chunk = neighbourhood[i].chunk;
-            if (chunk.check_collision(this.hero.center_point)) {
-                this.hero_chunk = {i:neighbourhood[i].i,j:neighbourhood[i].j};
-                break;
-            }
-        }
-    }
 
-    find_hero_chunk()
-    {
-        for(let i=0; i<this.CHUNK_IN_Y; i++) {
-            for (let j = 0; j < this.CHUNK_IN_X; j++) {
-                let chunk = this.board[i][j];
-
-                if (chunk.check_collision(this.hero.center_point)) {
-                    this.hero_chunk = {i:i,j:j};
-                    break;
-                }
-
-            }
-        }
-
-        console.log(this.hero.center_point.x + ", " + this.hero.center_point.y);
-    }
-
-    get hero_neighbourhood()
-    {
-        let neighbourhood = new Array(0);
-        let i = this.hero_chunk.i-1;
-        let j = this.hero_chunk.j -1; //indeksy jednego chunka po skosie w gore
-        for(let m =i; m<i+3; m++)
-        {
-            for(let n =j; n<j+3; n++)
-            {
-                let temp = {chunk: this.board[m][n], i:m,j:n};
-                neighbourhood.push(temp);
-            }
-        }
-        return neighbourhood;
-    }
-
-
-    load_textures()
-    {
-        for(let i =0; i<this.TEXTURE_PACK_SIZE; i++)
-        {
-            let img= new Image();   // Create new img elemen
-            console.log(img.src);
-            this.texture_pack[i] = img;
-            console.log("loaded :" + i);
-            img.src = 'img/' + i + this.TEXTURE_FORMAT;
-        }
-    }
-
-    generate_board(){
-        const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
-        const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
-
-        let y_position = 0;
-        for(let i =0; i<chunk_in_y; i++) {
-
-            let one_level = new Array(chunk_in_x);
-            let x_position = 0;
-            for(let j=0; j<chunk_in_x; j++)
-            {
-                let x = map[i][j];
-                let texture = this.texture_pack[x];
-                one_level[j] = new Chunk(texture,x,x_position,y_position,this.CHUNK_SIZE);
-
-                x_position+=this.CHUNK_SIZE;
-            }
-
-            this.board[i] = one_level;
-            y_position+=this.CHUNK_SIZE;
-
-        }
-    }
-
-    draw_chunk(chunk)
-    {
-        this.background.clearRect(chunk.x_position,chunk.y_position,this.CHUNK_SIZE,this.CHUNK_SIZE);
-        this.background.drawImage(chunk.texture,chunk.x_position,chunk.y_position);
-    }
-
-
-    draw_board()
-    {
-        const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
-        const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
-
-
-        for(let i=0; i<chunk_in_y; i++)
-        {
-
-            for(let j=0; j<chunk_in_x; j++)
-            {
-                let chunk= this.board[i][j];
-                this.background.drawImage(chunk.texture,chunk.x_position,chunk.y_position);
-
-                //this.canvas.drawImage(chunk.texture,0,0,8,16,x,y,8,16);
-                // canvas.fillStyle = chunk.color;
-                // canvas.fillRect(x,y,16,16);
-
-
-            }
-
-        }
-
-    }
 
 
 

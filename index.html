@@ -9,10 +9,13 @@
 
     <script src ="EliotEnigne/events.js"></script>
     <script src="EliotEnigne/map_temp.js"></script>
+    <script src="EliotEnigne/game_render.js"></script>
     <script src ="EliotEnigne/fire_gun.js"></script>
+    <script src="EliotEnigne/board.js"></script>
     <script src="EliotEnigne/hero.js"></script>
-    <script src = "EliotEnigne/eliot_engine_main_class.js"></script>
     <script src=EliotEnigne/main.js></script>
+    <script src = "EliotEnigne/eliot_engine_main_class.js"></script>
+
 
     <!--<script src ="jquery-3.3.1.js"></script>-->
     <style>
@@ -44,13 +47,10 @@
 
 
 <script>
-
-        const engine = new EliotEngine(800, 480, 32, 3, ".png");
+        const engine = new EliotEngine(800, 480, 32);
+        engine.load_board(3,".png");
         engine.load_hero("hero.png", 40, 40,8);
         engine.start_engine();
-
-
-
 </script>
 
 </body>
