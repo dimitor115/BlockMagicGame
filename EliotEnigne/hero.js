@@ -13,9 +13,9 @@ class hero {
 
     }
 
-    update_fire_gun(render,board)
+    update_fire_gun(render,board,destory)
     {
-        this.fire_gun.update_bullets(render,board);
+        this.fire_gun.update_bullets(render,board,destory);
     }
 
     check_if_fire()
@@ -27,6 +27,15 @@ class hero {
         }
     }
 
+    check_if_put(put_block)
+    {
+        if(enter_pressed)
+        {
+            enter_pressed=false;
+            let position = new Point(this.center_point.x,this.y_position);
+            put_block(position);
+        }
+    }
     move(board)
     {
         let temp_x_position = this.x_position;
@@ -53,13 +62,6 @@ class hero {
             this.center_point.x = this.x_position + this.hero_wight/2;
             this.center_point.y = this.y_position + this.hero_height/2;
         }
-
-        // this.x_position = temp_x_position;
-        // this.y_position = temp_y_position;
-        // this.center_point.x = this.x_position + this.hero_wight/2;
-        // this.center_point.y = this.y_position + this.hero_height/2;
-
-
 
     }
 
@@ -93,27 +95,5 @@ class hero {
         return false;
 
     }
-
-    // check_hero_collision(neighbourhood, temp_x, temp_y)
-    // {
-    //     for(let i=0; i<neighbourhood.length; i++){
-    //
-    //         let chunk = neighbourhood[i].chunk;
-    //         if(chunk.collison===1 && this.collision_for_chunk(chunk,temp_x,temp_y))
-    //             return true;
-    //     }
-    // }
-    //
-    // collision_for_chunk(chunk,temp_x,temp_y)
-    // {
-    //     let left_up_point = new Point(temp_x,temp_y);
-    //     let left_down_point = new Point(temp_x,temp_y+this.hero_height);
-    //     let right_up_point = new Point(temp_x + this.hero_wight,temp_y);
-    //     let right_down_point = new Point(temp_x + this.hero_wight,temp_y + this.hero_height);
-    //
-    //     return chunk.check_collision(left_down_point) || chunk.check_collision(left_up_point) || chunk.check_collision(right_up_point) || chunk.check_collision(right_down_point);
-    // }
-
-
 
 }

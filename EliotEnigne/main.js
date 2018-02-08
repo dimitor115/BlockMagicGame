@@ -19,6 +19,12 @@ class Chunk{
         this.texture = texture;
         this.collison=0;
     }
+
+    change_to(texture,collision)
+    {
+        this.texture = texture;
+        this.collison = collision;
+    }
 }
 
 class Point{

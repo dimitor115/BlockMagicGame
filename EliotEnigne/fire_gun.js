@@ -12,7 +12,7 @@ class Bullet {
 
     }
 
-    check_bullet_collision(board)
+    check_bullet_collision(board,destroy)
     {
         let m = this.x_position / 32;
         m = Math.floor(m);
@@ -20,16 +20,12 @@ class Bullet {
         n = Math.floor(n);
         let chunk = board[n][m];
 
-        console.log(chunk);
-        console.log(chunk.size);
-        console.log(chunk.collison);
-
         if(chunk.collison===1)
             this.disappear=true;
 
         if(chunk.collison===2)
         {
-            //EliotEngine.destory_block(chunk);
+            destroy(chunk);
             this.disappear=true;
         }
 
@@ -56,13 +52,13 @@ class Fire_gun {
         this.bullets.push(bullet);
     }
 
-    update_bullets(render,board) {
+    update_bullets(render,board,destroy) {
 
         let new_bullets = [];
         for (let i = 0; i < this.bullets.length; i++) {
 
             let bullet = this.bullets[i];
-            bullet.check_bullet_collision(board);
+            bullet.check_bullet_collision(board,destroy);
 
             if(!bullet.disappear)
             {

@@ -7,7 +7,7 @@ document.addEventListener('keydown', (event) => {
             which_key_pressed = event.key;
     }
 
-     console.log('down : ' + which_key_pressed);
+     console.log('down : ' + event.key);
 });
 
 document.addEventListener('keyup', (event) => {
@@ -22,5 +22,8 @@ document.addEventListener('keypress', (event)=>{
 
     if(event.key===" ")
         space_pressed = true;
+
+    if(event.key==="Enter")
+        enter_pressed = true;
 
 });

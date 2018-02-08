@@ -4,6 +4,7 @@ const NULL_STRING =  'null';
 let which_key_pressed = NULL_STRING;
 
 let space_pressed = false;
+let enter_pressed = false;
 
 const wsad = ["w","s","a","d"];
 
@@ -18,7 +19,6 @@ class EliotEngine {
         this.CHUNK_IN_Y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
         this.CHUNK_IN_X = this.CANVAS_WIGTH/this.CHUNK_SIZE;
 
-        this.block_to_destory = new Array(0);
 
         this.Board = null;
         this.hero = null;
@@ -52,7 +52,7 @@ class EliotEngine {
 
         const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
         const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
-        this.Board = new Board(board,chunk_in_x,chunk_in_y,texture_pack);
+        this.Board = new Board(board,chunk_in_x,chunk_in_y,this.CHUNK_SIZE,texture_pack);
 
 
     }
@@ -60,21 +60,27 @@ class EliotEngine {
     main_loop(){
 
         let FPS = 45;
+
+        let put_block = (position)=>{this.Board.put_block(position);
+        };
+
         let hero_move = () => {
             this.hero.move(this.Board.Board);
             this.hero.check_if_fire();
+            this.hero.check_if_put(put_block)
 
         };
         let render_bullet =(bullet)=>{this.Game_render.render_bullets(bullet);};
+        let destroy_block =(chunk)=>{this.Board.add_to_destroy(chunk)};
+
         let hero_render = () => {
             this.Game_render.Action_board.clearRect(0,0,this.CANVAS_WIGTH,this.CANVAS_HEIGHT); //clear all action board CZEMU ?!
             this.Game_render.render_hero(this.hero);
-
-            this.hero.update_fire_gun(render_bullet,this.Board.Board);
+            this.hero.update_fire_gun(render_bullet,this.Board.Board,destroy_block);
         };
 
         let board = () => {
-            //this.update_board()
+            this.Board.update_board()
         };
 
         //let render =() =>{this.Game_render.render_action_board()};
@@ -135,18 +141,7 @@ class EliotEngine {
 
     //BORDER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    update_board()
-    {
-        for(let i=0; i<this.block_to_destory.length; i++)
-        {
-            let chunk = this.block_to_destory[i];
-            chunk.change_to_background(this.texture_pack[0]);
-            //chunk.change_to_background(this.texture_pack[0]);
-            this.draw_chunk(chunk);
-        }
 
-        this.block_to_destory = new Array(0);
-    }
 
 
 

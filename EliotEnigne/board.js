@@ -12,6 +12,7 @@ class Board{
         const bg = document.getElementById("background-layer");
         this.background = bg.getContext("2d");
 
+        this.block_to_destory = [];
 
 
     }
@@ -37,5 +38,39 @@ class Board{
 
         }
 
+    }
+
+    put_block(position)
+    {
+
+        let m = position.x / 32;
+        m = Math.floor(m);
+        let n = position.y / 32;
+        n = Math.floor(n);
+
+        let chunk = this.Board[n-1][m];
+        if(chunk.collison===0)
+        {
+            chunk.change_to(this.Texture_pack[2],2);
+            this.draw_chunk(chunk);
+        }
+
+    }
+
+    add_to_destroy(chunk)
+    {
+        this.block_to_destory.push(chunk);
+    }
+
+    update_board()
+    {
+        for(let i=0; i<this.block_to_destory.length; i++)
+        {
+            let chunk = this.block_to_destory[i];
+            chunk.change_to_background(this.Texture_pack[0]);
+            this.draw_chunk(chunk);
+        }
+
+        this.block_to_destory = new Array(0);
     }
 }
