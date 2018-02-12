@@ -1,4 +1,7 @@
-class Spirits{
+import FireGun from './FireGun.js';
+import Spirit from './Spirit.js';
+
+export default class Spirits{
     constructor(texture,width,height,shift)
     {
         this.texture = texture;
@@ -12,7 +15,7 @@ class Spirits{
     {
         this.spirits = [];
         for(let i=0; i<how_many; i++){
-            let fire_gun = new Fire_gun('blue',24);
+            let fire_gun = new FireGun('blue',24);
             let spirit = new Spirit(this.texture,this.width,this.height,this.shift,fire_gun);
             spirit.x_position = 160;
             spirit.y_position = 160;

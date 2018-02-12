@@ -3,37 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="EliotEnigne/events.js"></script>
-    <script src="EliotEnigne/map_temp.js"></script>
-    <script src="EliotEnigne/game_render.js"></script>
-    <script src="EliotEnigne/fire_gun.js"></script>
-    <script src="EliotEnigne/board.js"></script>
-    <script src="EliotEnigne/hero.js"></script>
-    <script src="EliotEnigne/spirits.js"></script>
-    <script src=EliotEnigne/main.js></script>
-    <script src="EliotEnigne/eliot_engine_main_class.js"></script>
+    <title>Block Magic Game</title>
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body>
-
-    <div id="stage">
+    <div id="stage" class="stage">
         <canvas id="game-layer" width="800" height="480">1</canvas>
         <canvas id="background-layer" width="800" height="480">2</canvas>
     </div>
-
-    <!--<canvas width="800" height="480" id="my_canvas">-->
-    <!--chuj-->
-    <!--</canvas>-->
-    <script>
-        const engine = new EliotEngine(800, 480, 32);
-        engine.load_board(3, ".png");
-        engine.load_hero("hero.png", 40, 40, 8);
-        engine.load_spirit("spirit.png", 32, 40, 4);
-        engine.start_engine();
-    </script>
-
+    <script src="EliotEngine/global.js"></script>
+    <script src="EliotEngine/Game.js" type='module'></script>
 </body>
-
 </html>

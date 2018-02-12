@@ -1,12 +1,19 @@
-#stage {
+body {
+    margin: 0;
+}
+
+.stage {
     width: 800px;
     height: 480px;
     position: relative;
-    border: 2px solid black
+    border: 2px solid black;
+    margin: 50px auto;
 }
 
-canvas {
+.stage canvas {
     position: absolute;
+    left: 0;
+    top: 0;
 }
 
 /*#ui-layer { z-index: 3 }*/

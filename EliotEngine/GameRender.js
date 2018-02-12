@@ -1,8 +1,8 @@
-class Game_render{
+export default class GameRender{
     constructor(canvas_width,canvas_height)
     {
         const b = document.getElementById("game-layer");
-        this.Action_board =b.getContext("2d");
+        this.Action_board = b.getContext("2d");
         this.CANVAS_WIDTH = canvas_width;
         this.CANVAS_HEIGHT = canvas_height;
     }
