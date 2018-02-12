@@ -31,6 +31,7 @@ class EliotEngine {
         this.Board.draw_board();
         //this.find_hero_chunk();
         this.Game_render.render_hero(this.hero);
+        this.Game_render.render_spirits(this.spirits_manager.spirits);
         //this.hero_neighbourhood;
         this.main_loop();
 
@@ -43,6 +44,14 @@ class EliotEngine {
         image.src = 'img/'+img;
         this.hero = new hero(image,wight,height,shift,fire_gun);
 
+    }
+
+    load_spirit(img,width,height,shift)
+    {
+        let image = new Image();
+        image.src = 'img/'+img;
+        this.spirits_manager = new Spirits(image,width,height,shift);
+        this.spirits_manager.generate_spirits(1);
     }
 
     load_board(texture_pack_size,texture_format)
@@ -79,6 +88,11 @@ class EliotEngine {
             this.hero.update_fire_gun(render_bullet,this.Board.Board,destroy_block);
         };
 
+        let spirit = () => {
+            this.Game_render.render_spirits(this.spirits_manager.spirits);
+
+        };
+
         let board = () => {
             this.Board.update_board()
         };
@@ -90,6 +104,7 @@ class EliotEngine {
         setInterval(function() {
             hero_move();
             hero_render();
+            spirit();
             board();
         }, 1000/FPS);
 
