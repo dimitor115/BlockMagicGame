@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+}
+
+.stage {
+    width: 800px;
+    height: 480px;
+    position: relative;
+    border: 2px solid black;
+    margin: 50px auto;
+}
+
+.stage canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/*#ui-layer { z-index: 3 }*/
+
+#game-layer {
+    z-index: 2
+}
+
+#background-layer {
+    z-index: 1
+}

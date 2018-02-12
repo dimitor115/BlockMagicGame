@@ -1,4 +1,8 @@
-class hero {
+import consts from './consts.js';
+// import which_key_pressed, { space_pressed, enter_pressed} from './global.js';
+import Point from './Point.js';
+
+export default class Hero {
     constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun)
     {
         this.texture = texture;
@@ -9,8 +13,6 @@ class hero {
         this.shift_quantity = shift_quantity;
         this.center_point = new Point(this.x_position + hero_wight/2,this.y_position + hero_height/2);
         this.fire_gun = fire_gun;
-
-
     }
 
     update_fire_gun(render,board,destory)
@@ -43,16 +45,16 @@ class hero {
         let temp_y_position = this.y_position;
 
         switch (which_key_pressed){
-            case "w" :
+            case consts.KEY_UP:
                 temp_y_position-=this.shift_quantity;
                 break;
-            case "s":
+            case consts.KEY_DOWN:
                 temp_y_position+=this.shift_quantity;
                 break;
-            case "d":
+            case consts.KEY_RIGHT:
                 temp_x_position+=this.shift_quantity;
                 break;
-            case "a":
+            case consts.KEY_LEFT:
                 temp_x_position-=this.shift_quantity;
                 break;
         }
@@ -97,39 +99,4 @@ class hero {
 
     }
 
-}
-
-class Spirit extends hero{
-    constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun)
-    {
-        super(texture,hero_wight,hero_height,shift_quantity,fire_gun);
-    }
-
-    move(board){
-        let MOVE_PROBABILITY = 70;
-
-        let move = Math.floor((Math.random() * 100) + 1);
-        if(move<MOVE_PROBABILITY)
-        {
-            move = Math.floor((Math.random() * 100) + 1);
-            let temp_x_position = this.x_position;
-            let temp_y_position = this.y_position;
-
-            if(move<35)
-                temp_x_position+=this.shift_quantity;
-            else if(move < 70)
-                temp_x_position-=this.shift_quantity;
-            else if(move < 90)
-                temp_y_position+=this.shift_quantity;
-            else
-                temp_y_position-=this.shift_quantity;
-
-            if(!this.check_hero_collision(board,temp_x_position,temp_y_position)){
-                this.x_position = temp_x_position;
-                this.y_position = temp_y_position;
-                this.center_point.x = this.x_position + this.hero_wight/2;
-                this.center_point.y = this.y_position + this.hero_height/2;
-            }
-        }
-    }
 }

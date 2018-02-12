@@ -1,3 +1,0 @@
-class Collision_manager{
-
-}
