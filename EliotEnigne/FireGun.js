@@ -39,7 +39,7 @@ class Bullet {
 
 }
 
-class Fire_gun {
+export default class FireGun {
     constructor(color, speed) {
         this.color = color;
         this.speed = speed;

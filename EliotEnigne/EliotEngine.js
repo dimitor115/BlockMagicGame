@@ -1,15 +1,12 @@
-
 const NULL_STRING =  'null';
 
 let which_key_pressed = NULL_STRING;
 
 let space_pressed = false;
 let enter_pressed = false;
-
+import FireGunt from 'FireGun';
 
 export default class EliotEngine {
-
-
     constructor(canvas_wight, canvas_height, chunk_size) {
         this.CANVAS_WIGTH = canvas_wight;
         this.CANVAS_HEIGHT = canvas_height;
@@ -26,7 +23,7 @@ export default class EliotEngine {
         this.Game_render = new Game_render(this.CHUNK_IN_X,this.CHUNK_IN_Y);
     }
 
-    start_engine(){
+    start_engine() {
         this.Board.draw_board();
         //this.find_hero_chunk();
         this.Game_render.render_hero(this.hero);
@@ -36,12 +33,11 @@ export default class EliotEngine {
 
     }
 
-    load_hero(img,wight,height,shift)
-    {
-        let fire_gun = new Fire_gun('red',24);
+    load_hero(img,wight,height,shift) {
+        let fire_gun = new FireGun('red',24);
         let image = new Image();
         image.src = 'img/'+img;
-        this.hero = new hero(image,wight,height,shift,fire_gun);
+        this.hero = new Hero(image,wight,height,shift,fire_gun);
 
     }
 
