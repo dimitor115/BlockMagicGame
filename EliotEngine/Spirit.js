@@ -4,33 +4,56 @@ export default class Spirit extends Hero {
     constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun)
     {
         super(texture,hero_wight,hero_height,shift_quantity,fire_gun);
+        this.journey_lenght =0;
     }
 
     move(board){
-        let MOVE_PROBABILITY = 70;
+        let temp_x_position = this.x_position;
+        let temp_y_position = this.y_position;
 
-        let move = Math.floor((Math.random() * 100) + 1);
-        if(move<MOVE_PROBABILITY)
+
+        if(this.journey_lenght<=0)
         {
-            move = Math.floor((Math.random() * 100) + 1);
-            let temp_x_position = this.x_position;
-            let temp_y_position = this.y_position;
-
+            let move = Math.floor((Math.random() * 100) + 1);
+            this.journey_lenght = Math.floor((Math.random() * 60) + 10);
             if(move<35)
-                temp_x_position+=this.shift_quantity;
+            {
+                this.direction = {x:+this.shift_quantity,y:-this.shift_quantity};
+            }
             else if(move < 70)
-                temp_x_position-=this.shift_quantity;
-            else if(move < 90)
-                temp_y_position+=this.shift_quantity;
-            else
-                temp_y_position-=this.shift_quantity;
+            {
+                this.direction = {x:-this.shift_quantity,y:-this.shift_quantity};
 
+            }
+            else if(move < 85)
+            {
+                this.direction = {x:-this.shift_quantity,y:this.shift_quantity};
+
+            }
+            else
+                this.direction = {x:this.shift_quantity,y:this.shift_quantity};
+
+
+        }
+
+            temp_x_position+= this.direction.x;
+            temp_y_position+= this.direction.y;
+            this.journey_lenght--;
+
+        if(this.check_board_border_collision(board,temp_x_position,temp_y_position)) {
             if(!this.check_hero_collision(board,temp_x_position,temp_y_position)){
                 this.x_position = temp_x_position;
                 this.y_position = temp_y_position;
                 this.center_point.x = this.x_position + this.hero_wight/2;
                 this.center_point.y = this.y_position + this.hero_height/2;
-            }
+
+            }else
+                this.journey_lenght=0;
         }
+        else
+            this.journey_lenght=0;
+
+
+
     }
 }

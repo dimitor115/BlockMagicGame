@@ -59,11 +59,14 @@ export default class Hero {
                 break;
         }
 
-        if(!this.check_hero_collision(board,temp_x_position,temp_y_position)){
-            this.x_position = temp_x_position;
-            this.y_position = temp_y_position;
-            this.center_point.x = this.x_position + this.hero_wight/2;
-            this.center_point.y = this.y_position + this.hero_height/2;
+        if(this.check_board_border_collision(board,temp_x_position,temp_y_position))
+        {
+            if(!this.check_hero_collision(board,temp_x_position,temp_y_position)){
+                this.x_position = temp_x_position;
+                this.y_position = temp_y_position;
+                this.center_point.x = this.x_position + this.hero_wight/2;
+                this.center_point.y = this.y_position + this.hero_height/2;
+            }
         }
 
     }
@@ -97,6 +100,13 @@ export default class Hero {
         }
         return false;
 
+    }
+
+    check_board_border_collision(board,temp_x,temp_y) {
+        let y_max = board.length * 32;
+        let x_max = board[0].length * 32;
+
+        return (temp_x >= 0 && temp_x + this.hero_wight <= x_max) && (temp_y >= 0 && temp_y + this.hero_height <= y_max);
     }
 
 }

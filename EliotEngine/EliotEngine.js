@@ -28,7 +28,7 @@ export default class EliotEngine {
     start_engine() {
         this.Board.draw_board();
         this.game_render.render_hero(this.hero);
-        //this.game_render.render_spirits(this.spirits_manager.spirits);
+        this.game_render.render_spirits(this.spirits_manager.spirits);
 
         engine_start = true;
 
@@ -46,8 +46,11 @@ export default class EliotEngine {
     {
         let image = new Image();
         image.src = `${img_path}${img}`;
+        image.onload=function () {
+          console.log("loaded spritit");
+        };
         this.spirits_manager = new Spirits(image,width,height,shift);
-        this.spirits_manager.generate_spirits(1);
+        this.spirits_manager.generate_spirits(5);
     }
 
     load_board(texture_pack_size,texture_format)
@@ -85,7 +88,9 @@ export default class EliotEngine {
         };
 
         let spirit = () => {
+            this.spirits_manager.move_spirits(this.Board.Board);
             this.game_render.render_spirits(this.spirits_manager.spirits);
+
 
         };
 
@@ -102,7 +107,7 @@ export default class EliotEngine {
 
         setInterval(function() {
 
-            if(loaded_img)
+            if(loaded_img && !engine_start)
                 start_engine();
 
 
@@ -110,6 +115,7 @@ export default class EliotEngine {
             {
                 hero_move();
                 hero_render();
+                spirit();
                 board();
             }
         

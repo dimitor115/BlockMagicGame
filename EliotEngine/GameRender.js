@@ -14,20 +14,17 @@ export default class GameRender{
 
     render_hero(hero)
     {
-        //this.Action_board.save();
-        //this.Action_board.rotate((Math.PI / 180)*90);
-        //this.Action_board.fillRect(20,20,20,20);
-        //this.Action_board.translate(40, 40);
-        this.Action_board.drawImage(hero.texture,hero.x_position,hero.y_position);
 
-        //this.Action_board.restore();
+        this.Action_board.drawImage(hero.texture,hero.x_position,hero.y_position);
     }
+
 
     render_spirits(spirits)
     {
         for(let i=0; i<spirits.length; i++)
         {
             this.render_hero(spirits[i]);
+            console.log("draw sprti");
         }
     }
 
