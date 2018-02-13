@@ -11,20 +11,30 @@ export class Bullet {
 
     }
     check_bullet_collision(board, destroy) {
-        let m = this.x_position / 32;
+
+        let m = this.y_position / 32;
         m = Math.floor(m);
-        let n = this.y_position / 32;
+
+        let n = this.x_position / 32;
         n = Math.floor(n);
-        let chunk = board[n][m];
 
-        if (chunk.collison === 1) 
-            this.disappear = true;
-        
-        if (chunk.collison === 2) {
-            destroy(chunk);
-            this.disappear = true;
+
+        let y_max = board.length;
+        let x_max = board[0].length;
+
+        if(m >0 && m <y_max && n>0 && n<x_max)
+        {
+            let chunk = board[m][n];
+
+            if (chunk.collison === 1)
+                this.disappear = true;
+
+            if (chunk.collison === 2) {
+                destroy(chunk);
+                this.disappear = true;
+            }
+
         }
-
     }
     update() {
         this.y_position -= this.speed;
