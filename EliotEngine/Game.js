@@ -5,8 +5,8 @@ import { handleKeyDown, handleKeyUp, handleKeyPress } from './events.js';
 const engine = new EliotEngine(800, 480, 32);
 engine.load_board(3, ".png");
 engine.load_hero("hero.png", 40, 40, 8);
-engine.load_spirit("spirit.png", 32, 40, 4);
-engine.start_engine();
+//engine.load_spirit("spirit.png", 32, 40, 4);
+engine.main_loop();
 
 document.addEventListener('keydown', handleKeyDown);
 document.addEventListener('keyup', handleKeyUp);

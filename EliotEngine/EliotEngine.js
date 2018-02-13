@@ -8,6 +8,7 @@ import map from './map_temp.js';
 
 const img_path = 'assets/img/';
 
+
 export default class EliotEngine {
     constructor(canvas_wight, canvas_height, chunk_size) {
         this.CANVAS_WIGTH = canvas_wight;
@@ -26,11 +27,10 @@ export default class EliotEngine {
 
     start_engine() {
         this.Board.draw_board();
-        //this.find_hero_chunk();
         this.game_render.render_hero(this.hero);
-        this.game_render.render_spirits(this.spirits_manager.spirits);
-        //this.hero_neighbourhood;
-        this.main_loop();
+        //this.game_render.render_spirits(this.spirits_manager.spirits);
+
+        engine_start = true;
 
     }
 
@@ -93,14 +93,25 @@ export default class EliotEngine {
             this.Board.update_board()
         };
 
+        let start_engine = () => {
+            this.start_engine();
+        };
+
         //let render =() =>{this.game_render.render_action_board()};
 
 
         setInterval(function() {
-            hero_move();
-            hero_render();
-            spirit();
-            board();
+
+            if(loaded_img)
+                start_engine();
+
+
+            if(engine_start)
+            {
+                hero_move();
+                hero_render();
+                board();
+            }
         
         }, 1000/FPS);
 
@@ -114,10 +125,17 @@ export default class EliotEngine {
         for(let i =0; i<texture_pack_size; i++)
         {
             let img= new Image();
-            console.log(img.src);
-            texture_pack[i] = img;
-            console.log("loaded texture nr:" + i);
+            img.onload = function () {
+                console.log("loaded texture nr:" + i);
+                if(i===texture_pack_size-1)
+                {
+                    loaded_img = true;
+                    console.log("loaded last img");
+                }
+            };
+
             img.src = `${img_path}${i}${texture_format}`;
+            texture_pack[i] = img;
         }
 
         return texture_pack;

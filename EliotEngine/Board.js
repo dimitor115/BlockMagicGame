@@ -24,6 +24,7 @@ export default class Board {
     }
 
     draw_board() {
+        console.log("drawing_board");
         for (let i = 0; i < this.CHUNKS_IN_Y; i++) {
             for (let j = 0; j < this.CHUNKS_IN_X; j++) {
                 let chunk = this.Board[i][j];
