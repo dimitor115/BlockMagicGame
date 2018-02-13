@@ -1,13 +1,18 @@
 body {
     margin: 0;
+    background-color: #008ba3;
 }
 
 .stage {
-    width: 800px;
-    height: 480px;
-    position: relative;
-    border: 2px solid black;
-    margin: 50px auto;
+    width: 1440px;
+    height: 896px;
+    position: absolute;
+    /*border: 2px solid black;*/
+    /*margin: 50px auto;*/
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 
 .stage canvas {

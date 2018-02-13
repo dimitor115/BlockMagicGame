@@ -153,7 +153,8 @@ export default class EliotEngine {
             let x_position = 0;
             for(let j=0; j<chunk_in_x; j++)
             {
-                let x = map[i][j];
+                //let x = map[i][j];
+                let x = 0;
                 let texture = texture_pack[x];
                 one_level[j] = new Chunk(texture,x,x_position,y_position,this.CHUNK_SIZE);
 
