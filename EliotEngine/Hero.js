@@ -3,7 +3,7 @@ import consts from './consts.js';
 import Point from './Point.js';
 
 export default class Hero {
-    constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun)
+    constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun,life_points)
     {
         this.texture = texture;
         this.hero_wight = hero_wight;
@@ -13,11 +13,12 @@ export default class Hero {
         this.shift_quantity = shift_quantity;
         this.center_point = new Point(this.x_position + hero_wight/2,this.y_position + hero_height/2);
         this.fire_gun = fire_gun;
+        this.life_points = life_points;
     }
 
-    update_fire_gun(render,board,destory)
+    update_fire_gun(render,board,destory,spirits)
     {
-        this.fire_gun.update_bullets(render,board,destory);
+        this.fire_gun.update_bullets(render,board,destory,spirits);
     }
 
     check_if_fire()
@@ -37,6 +38,12 @@ export default class Hero {
             let position = new Point(this.center_point.x,this.y_position);
             put_block(position);
         }
+    }
+
+    mark_as_shoted()
+    {
+        this.life_points--;
+        console.log("trafimy :C");
     }
 
     move(board)
@@ -107,6 +114,11 @@ export default class Hero {
         let x_max = board[0].length * 32;
 
         return (temp_x >= 0 && temp_x + this.hero_wight <= x_max) && (temp_y >= 0 && temp_y + this.hero_height <= y_max);
+    }
+
+    check_point_collisoion(point) //check if point is inside
+    {
+        return (point.x > this.x_position && point.x < this.x_position+this.hero_wight) && (point.y > this.y_position && point.y < this.y_position+this.hero_height)
     }
 
 }

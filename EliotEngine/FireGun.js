@@ -1,3 +1,5 @@
+import Point from "./Point.js";
+
 export class Bullet {
     constructor(x_position, y_position, color, speed) {
         this.BULLET_WIDTH = 6;
@@ -10,6 +12,20 @@ export class Bullet {
         this.disappear = false;
 
     }
+
+    check_bullet_spirits_collision(spirits)
+    {
+        for(let i=0; i<spirits.length; i++)
+        {
+            let spirit = spirits[i];
+            let center_point = new Point(this.x_position+this.BULLET_WIDTH/2,this.y_position);
+            if(spirit.check_point_collisoion(center_point))
+            {
+                spirit.mark_as_shoted();
+            }
+        }
+    }
+
     check_bullet_collision(board, destroy) {
 
         let m = this.y_position / 32;
@@ -56,13 +72,14 @@ export default class FireGun {
             .push(bullet);
     }
 
-    update_bullets(render, board, destroy) {
+    update_bullets(render, board, destroy,spirits) {
 
         let new_bullets = [];
         for (let i = 0; i < this.bullets.length; i++) {
 
             let bullet = this.bullets[i];
             bullet.check_bullet_collision(board, destroy);
+            bullet.check_bullet_spirits_collision(spirits);
 
             if (!bullet.disappear) {
                 bullet.update();

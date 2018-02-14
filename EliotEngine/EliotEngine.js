@@ -50,7 +50,7 @@ export default class EliotEngine {
           console.log("loaded spritit");
         };
         this.spirits_manager = new Spirits(image,width,height,shift);
-        this.spirits_manager.generate_spirits(5);
+        this.spirits_manager.generate_spirits(10);
     }
 
     load_board(texture_pack_size,texture_format)
@@ -81,17 +81,28 @@ export default class EliotEngine {
         let render_bullet =(bullet)=>{this.game_render.render_bullets(bullet);};
         let destroy_block =(chunk)=>{this.Board.add_to_destroy(chunk)};
 
+        let copy_table=(table)=> {
+            let temp_table = [];
+            for (let i=0; i<table.length; i++){
+                temp_table.push(table[i]);
+            }
+            return temp_table;
+        };
+        let spirits = copy_table(this.spirits_manager.spirits);
+        spirits.push(this.hero);
+
         let hero_render = () => {
             this.game_render.Action_board.clearRect(0,0,this.CANVAS_WIGTH,this.CANVAS_HEIGHT); //clear all action board CZEMU ?!
             this.game_render.render_hero(this.hero);
-            this.hero.update_fire_gun(render_bullet,this.Board.Board,destroy_block);
+
+            this.hero.update_fire_gun(render_bullet,this.Board.Board,destroy_block,spirits);
         };
 
         let spirit = () => {
-            this.spirits_manager.move_spirits(this.Board.Board);
+           // this.spirits_manager.move_spirits(this.Board.Board);
+            this.spirits_manager.update_spirits(this.Board.Board);
+            this.spirits_manager.fire_fireGun(render_bullet,this.Board.Board,destroy_block,spirits);
             this.game_render.render_spirits(this.spirits_manager.spirits);
-
-
         };
 
         let board = () => {

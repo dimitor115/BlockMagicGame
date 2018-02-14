@@ -1,10 +1,19 @@
 import Hero from './Hero.js';
 
 export default class Spirit extends Hero {
-    constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun)
+    constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun,life_points)
     {
-        super(texture,hero_wight,hero_height,shift_quantity,fire_gun);
+        super(texture,hero_wight,hero_height,shift_quantity,fire_gun,life_points);
         this.journey_lenght =0;
+    }
+
+    check_if_fire()
+    {
+        const FIRE_PROBABILITY = 5;
+        let fire = Math.floor((Math.random() * 100) + 1);
+
+        if(fire < FIRE_PROBABILITY)
+            this.fire_gun.fire_bullet(this.center_point.x,this.y_position);
     }
 
     move(board){
