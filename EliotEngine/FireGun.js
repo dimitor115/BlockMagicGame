@@ -1,7 +1,9 @@
+import consts from "./consts.js";
 import Point from "./Point.js";
 
+
 export class Bullet {
-    constructor(x_position, y_position, color, speed) {
+    constructor(x_position, y_position, color, speed,rotation) {
         this.BULLET_WIDTH = 6;
         this.BULLET_HIGHT = 10;
 
@@ -10,6 +12,8 @@ export class Bullet {
         this.color = color;
         this.speed = speed;
         this.disappear = false;
+
+        this.rotation = rotation;
 
     }
 
@@ -53,7 +57,18 @@ export class Bullet {
         }
     }
     update() {
-        this.y_position -= this.speed;
+
+        switch (this.rotation)
+        {
+            case consts.RIGHT_ROTATION:
+                this.x_position+=this.speed; break;
+            case consts.UP_ROTATION:
+                this.y_position-=this.speed; break;
+            case consts.LEFT_ROTATION:
+                this.x_position-=this.speed; break;
+            case consts.DOWN_ROTATION:
+                this.y_position+=this.speed; break
+        }
     }
 }
 
@@ -65,8 +80,8 @@ export default class FireGun {
 
     }
 
-    fire_bullet(x, y) {
-        let bullet = new Bullet(x, y, this.color, this.speed);
+    fire_bullet(point,rotation) {
+        let bullet = new Bullet(point.x, point.y, this.color, this.speed,rotation);
         this
             .bullets
             .push(bullet);

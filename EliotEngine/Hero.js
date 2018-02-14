@@ -1,10 +1,12 @@
 import consts from './consts.js';
-// import which_key_pressed, { space_pressed, enter_pressed} from './global.js';
+//import which_key_pressed, { space_pressed, enter_pressed} from './global.js';
+//import shift_pressed from './global';
 import Point from './Point.js';
 
 export default class Hero {
     constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun,life_points)
     {
+
         this.texture = texture;
         this.hero_wight = hero_wight;
         this.hero_height = hero_height;
@@ -14,11 +16,27 @@ export default class Hero {
         this.center_point = new Point(this.x_position + hero_wight/2,this.y_position + hero_height/2);
         this.fire_gun = fire_gun;
         this.life_points = life_points;
+        this.rotation= consts.UP_ROTATION;
     }
 
-    update_fire_gun(render,board,destory,spirits)
+    check_rotation()
     {
-        this.fire_gun.update_bullets(render,board,destory,spirits);
+        if(l_key_pressed)
+        {
+            l_key_pressed=false;
+
+            if(this.rotation>=3)
+                this.rotation = consts.RIGHT_ROTATION;
+            else
+                this.rotation++;
+
+            console.log("rotate!" + this.rotation);
+        }
+    }
+
+    update_fire_gun(render,board,destroy,spirits)
+    {
+        this.fire_gun.update_bullets(render,board,destroy,spirits);
     }
 
     check_if_fire()
@@ -26,7 +44,22 @@ export default class Hero {
         if(space_pressed)
         {
             space_pressed=false;
-            this.fire_gun.fire_bullet(this.center_point.x,this.y_position);
+            this.fire_gun.fire_bullet(this.actual_top_position,this.rotation);//POPRAWIĆ
+        }
+    }
+
+    get actual_top_position()
+    {
+        switch (this.rotation)
+        {
+            case consts.RIGHT_ROTATION:
+                return new Point(this.x_position + consts.CHUNK_SIZE,this.center_point.y);
+            case consts.UP_ROTATION:
+                return new Point(this.center_point.x,this.y_position);
+            case consts.LEFT_ROTATION:
+                return new Point(this.x_position,this.center_point.y);
+            case consts.DOWN_ROTATION:
+                return new Point(this.center_point.x,this.y_position+consts.CHUNK_SIZE);
         }
     }
 
@@ -35,8 +68,8 @@ export default class Hero {
         if(enter_pressed)
         {
             enter_pressed=false;
-            let position = new Point(this.center_point.x,this.y_position);
-            put_block(position);
+            let position = this.actual_top_position;
+            put_block(position,this.rotation);
         }
     }
 

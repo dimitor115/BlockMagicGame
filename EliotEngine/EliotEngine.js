@@ -69,13 +69,15 @@ export default class EliotEngine {
 
         let FPS = 45;
 
-        let put_block = (position)=>{this.Board.put_block(position);
+        let put_block = (position,rotation)=>{this.Board.put_block(position,rotation);
         };
 
         let hero_move = () => {
             this.hero.move(this.Board.Board);
+            this.hero.check_rotation();
             this.hero.check_if_fire();
-            this.hero.check_if_put(put_block)
+            this.hero.check_if_put(put_block);
+
 
         };
         let render_bullet =(bullet)=>{this.game_render.render_bullets(bullet);};
@@ -184,8 +186,5 @@ export default class EliotEngine {
 
         return board;
     }
-
-
-    //BORDER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 }

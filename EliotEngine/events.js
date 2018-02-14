@@ -9,7 +9,7 @@ export function handleKeyDown(event) {
             which_key_pressed = event.key;
     }
 
-     console.log('down : ' + event.key);
+     //console.log('down : ' + event.key);
 }
 export function handleKeyUp(event) {
     if(event.key===which_key_pressed){
@@ -18,8 +18,18 @@ export function handleKeyUp(event) {
     }
 }
 export function handleKeyPress(event) {
+
+    console.log(event.key);
+
     if(event.key===" ")
         space_pressed = true;
-    if(event.key==="Enter")
-        enter_pressed = true;
+    else if(event.key==="Enter")
+    {enter_pressed = true;
+    }
+    else if(event.key ==="l")
+    {
+        l_key_pressed = true;
+    }
+        //console.log(event.key);
+
 }

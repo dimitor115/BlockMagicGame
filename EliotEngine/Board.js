@@ -1,3 +1,7 @@
+import consts from './consts.js';
+
+//import Point from "./Point";
+
 export default class Board {
     constructor(board, chunks_in_x, chunks_in_y, chunk_size, texture_pack) {
         this.CHUNK_SIZE = chunk_size;
@@ -35,14 +39,28 @@ export default class Board {
         }
     }
 
-    put_block(position) {
+    put_block(position,rotation) {
 
         let m = position.x / 32;
         m = Math.floor(m);
         let n = position.y / 32;
         n = Math.floor(n);
 
-        let chunk = this.Board[n - 1][m];
+        let chunk;
+
+        switch (rotation)
+        {
+            case consts.RIGHT_ROTATION:
+                chunk = this.Board[n][m+1]; break;
+            case consts.UP_ROTATION:
+                chunk = this.Board[n-1][m]; break;
+            case consts.LEFT_ROTATION:
+                chunk = this.Board[n][m-1]; break;
+            case consts.DOWN_ROTATION:
+                chunk = this.Board[n+1][m]; break;
+        }
+
+
         if (chunk.collison === 0) {
             chunk.change_to(this.Texture_pack[2], 2);
             this.draw_chunk(chunk);

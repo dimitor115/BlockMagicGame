@@ -24,7 +24,6 @@ export default class GameRender{
         for(let i=0; i<spirits.length; i++)
         {
             this.render_hero(spirits[i]);
-            console.log("draw sprti");
         }
     }
 
