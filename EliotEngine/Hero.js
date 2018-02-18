@@ -79,7 +79,7 @@ export default class Hero {
         console.log("trafimy :C");
     }
 
-    move(board)
+    move(board,spirits)
     {
         let temp_x_position = this.x_position;
         let temp_y_position = this.y_position;
@@ -101,7 +101,7 @@ export default class Hero {
 
         if(this.check_board_border_collision(board,temp_x_position,temp_y_position))
         {
-            if(!this.check_hero_collision(board,temp_x_position,temp_y_position)){
+            if(!this.check_hero_collision(board, spirits,temp_x_position,temp_y_position)){
                 this.x_position = temp_x_position;
                 this.y_position = temp_y_position;
                 this.center_point.x = this.x_position + this.hero_wight/2;
@@ -111,7 +111,7 @@ export default class Hero {
 
     }
 
-    check_hero_collision(board,temp_x, temp_y)
+    check_hero_collision(board,spirits,temp_x, temp_y)
     {
 
 
@@ -131,12 +131,23 @@ export default class Hero {
             return board[n][m];
         };
 
+        let check_collision_with_spirits=(critical_point)=>{
+            for(let j=0; j<spirits.length; j++)
+            {
+                let spirit = spirits[j];
+                if(spirit !== this && spirit.check_point_collisoion(critical_point))
+                    return true;
+            }
+
+    };
+
         for(let i=0; i<critical_points.length; i++)
         {
             let critical_point = critical_points[i];
             let chunk = get_chunk_from_point(critical_point);
-            if(chunk.collison>0) //check if any of chunks that hero will be, has collision >0
+            if(chunk.collison>0 || check_collision_with_spirits(critical_point)) //check if any of chunks that hero will be, has collision >0
                 return true;
+
         }
         return false;
 

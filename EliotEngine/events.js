@@ -19,7 +19,7 @@ export function handleKeyUp(event) {
 }
 export function handleKeyPress(event) {
 
-    console.log(event.key);
+    //console.log(event.key);
 
     if(event.key===" ")
         space_pressed = true;

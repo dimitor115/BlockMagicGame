@@ -50,7 +50,7 @@ export default class EliotEngine {
           console.log("loaded spritit");
         };
         this.spirits_manager = new Spirits(image,width,height,shift);
-        this.spirits_manager.generate_spirits(10);
+        this.spirits_manager.generate_spirits(1);
     }
 
     load_board(texture_pack_size,texture_format)
@@ -69,20 +69,6 @@ export default class EliotEngine {
 
         let FPS = 45;
 
-        let put_block = (position,rotation)=>{this.Board.put_block(position,rotation);
-        };
-
-        let hero_move = () => {
-            this.hero.move(this.Board.Board);
-            this.hero.check_rotation();
-            this.hero.check_if_fire();
-            this.hero.check_if_put(put_block);
-
-
-        };
-        let render_bullet =(bullet)=>{this.game_render.render_bullets(bullet);};
-        let destroy_block =(chunk)=>{this.Board.add_to_destroy(chunk)};
-
         let copy_table=(table)=> {
             let temp_table = [];
             for (let i=0; i<table.length; i++){
@@ -93,6 +79,24 @@ export default class EliotEngine {
         let spirits = copy_table(this.spirits_manager.spirits);
         spirits.push(this.hero);
 
+
+
+        let put_block = (position,rotation)=>{this.Board.put_block(position,rotation);
+        };
+
+        let hero_move = () => {
+            this.hero.move(this.Board.Board,spirits);
+            this.hero.check_rotation();
+            this.hero.check_if_fire();
+            this.hero.check_if_put(put_block);
+
+
+        };
+        let render_bullet =(bullet)=>{this.game_render.render_bullets(bullet);};
+        let destroy_block =(chunk)=>{this.Board.add_to_destroy(chunk)};
+
+
+
         let hero_render = () => {
             this.game_render.Action_board.clearRect(0,0,this.CANVAS_WIGTH,this.CANVAS_HEIGHT); //clear all action board CZEMU ?!
             this.game_render.render_hero(this.hero);
@@ -102,7 +106,7 @@ export default class EliotEngine {
 
         let spirit = () => {
            // this.spirits_manager.move_spirits(this.Board.Board);
-            this.spirits_manager.update_spirits(this.Board.Board);
+            this.spirits_manager.update_spirits(this.Board.Board,spirits);
             this.spirits_manager.fire_fireGun(render_bullet,this.Board.Board,destroy_block,spirits);
             this.game_render.render_spirits(this.spirits_manager.spirits);
         };

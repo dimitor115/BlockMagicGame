@@ -34,7 +34,7 @@ export default class Spirits{
         }
     }
 
-    update_spirits(board){
+    update_spirits(board,spirits){
 
         let updated_spirits = [];
 
@@ -43,7 +43,7 @@ export default class Spirits{
 
             let spirit = this.spirits[i];
             if(spirit.life_points>0){
-                spirit.move(board);
+                spirit.move(board,spirits);
                 updated_spirits.push(spirit);
 
             }else{

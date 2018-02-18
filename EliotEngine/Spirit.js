@@ -6,19 +6,22 @@ export default class Spirit extends Hero {
     {
         super(texture,hero_wight,hero_height,shift_quantity,fire_gun,life_points);
         this.journey_lenght =0;
+        this.x_position = 200;
+        this.y_position = 200;
+
         this.rotation = consts.DOWN_ROTATION;
     }
 
     check_if_fire()
     {
-        const FIRE_PROBABILITY = 5;
+        const FIRE_PROBABILITY = 2;
         let fire = Math.floor((Math.random() * 100) + 1);
 
         if(fire < FIRE_PROBABILITY)
             this.fire_gun.fire_bullet(this.actual_top_position,this.rotation);
     }
 
-    move(board){
+    move(board,spirits){
         let temp_x_position = this.x_position;
         let temp_y_position = this.y_position;
 
@@ -52,7 +55,7 @@ export default class Spirit extends Hero {
             this.journey_lenght--;
 
         if(this.check_board_border_collision(board,temp_x_position,temp_y_position)) {
-            if(!this.check_hero_collision(board,temp_x_position,temp_y_position)){
+            if(!this.check_hero_collision(board,spirits,temp_x_position,temp_y_position)){
                 this.x_position = temp_x_position;
                 this.y_position = temp_y_position;
                 this.center_point.x = this.x_position + this.hero_wight/2;
