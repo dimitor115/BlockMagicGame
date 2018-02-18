@@ -26,9 +26,7 @@ export default class Spirits{
         this.spirits = [];
         for(let i=0; i<how_many; i++){
             let fire_gun = new FireGun('blue',24);
-            let spirit = new Spirit(this.texture,this.width,this.height,this.shift,fire_gun,3);
-            spirit.x_position = 160;
-            spirit.y_position = 160;
+            let spirit = new Spirit(this.texture,this.width,this.height,200 + i*50,300,this.shift,fire_gun,3);
             this.spirits.push(spirit);
             console.log("load spirit : " + i);
         }

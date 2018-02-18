@@ -2,12 +2,10 @@ import Hero from './Hero.js';
 import consts from "./consts.js";
 
 export default class Spirit extends Hero {
-    constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun,life_points)
+    constructor(texture,hero_wight,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
     {
-        super(texture,hero_wight,hero_height,shift_quantity,fire_gun,life_points);
+        super(texture,hero_wight,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points);
         this.journey_lenght =0;
-        this.x_position = 200;
-        this.y_position = 200;
 
         this.rotation = consts.DOWN_ROTATION;
     }

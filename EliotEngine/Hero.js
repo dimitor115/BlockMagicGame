@@ -4,14 +4,14 @@ import consts from './consts.js';
 import Point from './Point.js';
 
 export default class Hero {
-    constructor(texture,hero_wight,hero_height,shift_quantity,fire_gun,life_points)
+    constructor(texture,hero_wight,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
     {
 
         this.texture = texture;
         this.hero_wight = hero_wight;
         this.hero_height = hero_height;
-        this.x_position = 96; //pozycja lewego górnego rogu
-        this.y_position = 96; // pozyc lewego górnego rogu
+        this.x_position = x_position;
+        this.y_position = y_position;
         this.shift_quantity = shift_quantity;
         this.center_point = new Point(this.x_position + hero_wight/2,this.y_position + hero_height/2);
         this.fire_gun = fire_gun;

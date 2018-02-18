@@ -38,7 +38,7 @@ export default class EliotEngine {
         let fire_gun = new FireGun('red',24);
         let image = new Image();
         image.src = `${img_path}${img}`;
-        this.hero = new Hero(image,wight,height,shift,fire_gun);
+        this.hero = new Hero(image,wight,height,96,96,shift,fire_gun);
         // console.log(this.hero);
     }
 
@@ -50,7 +50,7 @@ export default class EliotEngine {
           console.log("loaded spritit");
         };
         this.spirits_manager = new Spirits(image,width,height,shift);
-        this.spirits_manager.generate_spirits(1);
+        this.spirits_manager.generate_spirits(3);
     }
 
     load_board(texture_pack_size,texture_format)
@@ -76,8 +76,12 @@ export default class EliotEngine {
             }
             return temp_table;
         };
-        let spirits = copy_table(this.spirits_manager.spirits);
-        spirits.push(this.hero);
+        let spirits;
+
+        let update_spirits_array = () => {
+            spirits = copy_table(this.spirits_manager.spirits);
+            spirits.push(this.hero);
+        };
 
 
 
@@ -130,6 +134,7 @@ export default class EliotEngine {
 
             if(engine_start)
             {
+                update_spirits_array();
                 hero_move();
                 hero_render();
                 spirit();
