@@ -77,8 +77,12 @@ export default class Board {
     update_board() {
         for (let i = 0; i < this.block_to_destory.length; i++) {
             let chunk = this.block_to_destory[i];
-            chunk.change_to_background(this.Texture_pack[0]);
-            this.draw_chunk(chunk);
+            chunk.mark_as_hited();
+            if(chunk.life_points<=0)
+            {
+                chunk.change_to_background(this.Texture_pack[0]);
+                this.draw_chunk(chunk);
+            }
         }
 
         this.block_to_destory = new Array(0);

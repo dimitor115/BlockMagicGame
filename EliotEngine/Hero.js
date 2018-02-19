@@ -17,6 +17,12 @@ export default class Hero {
         this.fire_gun = fire_gun;
         this.life_points = life_points;
         this.rotation= consts.UP_ROTATION;
+        this.backpack_blocks =0;
+    }
+
+    add_block_to_backpack()
+    {
+        this.backpack_blocks++;
     }
 
     check_rotation()
@@ -68,8 +74,12 @@ export default class Hero {
         if(enter_pressed)
         {
             enter_pressed=false;
-            let position = this.actual_top_position;
-            put_block(position,this.rotation);
+            if(this.backpack_blocks >0)
+            {
+                let position = this.actual_top_position;
+                put_block(position,this.rotation);
+                this.backpack_blocks--;
+            }
         }
     }
 

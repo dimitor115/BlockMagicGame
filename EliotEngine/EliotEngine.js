@@ -97,7 +97,8 @@ export default class EliotEngine {
 
         };
         let render_bullet =(bullet)=>{this.game_render.render_bullets(bullet);};
-        let destroy_block =(chunk)=>{this.Board.add_to_destroy(chunk)};
+
+        let destroy_block =(chunk)=>{this.Board.add_to_destroy(chunk); this.hero.add_block_to_backpack();};
 
 
 
@@ -172,6 +173,9 @@ export default class EliotEngine {
     generate_board(texture_pack){
         const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
         const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
+        const chunk_life_points = 5;
+
+
         let board = new Array(chunk_in_y);
 
         let y_position = 0;
@@ -184,7 +188,7 @@ export default class EliotEngine {
                 //let x = map[i][j];
                 let x = 0;
                 let texture = texture_pack[x];
-                one_level[j] = new Chunk(texture,x,x_position,y_position,this.CHUNK_SIZE);
+                one_level[j] = new Chunk(texture,x,x_position,y_position,this.CHUNK_SIZE,chunk_life_points);
 
                 x_position+=this.CHUNK_SIZE;
             }
