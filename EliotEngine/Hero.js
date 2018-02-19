@@ -4,16 +4,16 @@ import consts from './consts.js';
 import Point from './Point.js';
 
 export default class Hero {
-    constructor(texture,hero_wight,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
+    constructor(texture,hero_width,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
     {
 
         this.texture = texture;
-        this.hero_wight = hero_wight;
+        this.hero_width = hero_width;
         this.hero_height = hero_height;
         this.x_position = x_position;
         this.y_position = y_position;
         this.shift_quantity = shift_quantity;
-        this.center_point = new Point(this.x_position + hero_wight/2,this.y_position + hero_height/2);
+        this.center_point = new Point(this.x_position + hero_width/2,this.y_position + hero_height/2);
         this.fire_gun = fire_gun;
         this.life_points = life_points;
         this.rotation= consts.UP_ROTATION;
@@ -104,7 +104,7 @@ export default class Hero {
             if(!this.check_hero_collision(board, spirits,temp_x_position,temp_y_position)){
                 this.x_position = temp_x_position;
                 this.y_position = temp_y_position;
-                this.center_point.x = this.x_position + this.hero_wight/2;
+                this.center_point.x = this.x_position + this.hero_width/2;
                 this.center_point.y = this.y_position + this.hero_height/2;
             }
         }
@@ -117,15 +117,15 @@ export default class Hero {
 
         const left_up_point = new Point(temp_x+1,temp_y+1);
         const left_down_point = new Point(temp_x+1,temp_y+this.hero_height-1);
-        const right_up_point = new Point(temp_x + this.hero_wight -1,temp_y+1);
-        const right_down_point = new Point(temp_x + this.hero_wight -1,temp_y + this.hero_height -1);
-        const center_point = this.center_point;
+        const right_up_point = new Point(temp_x + this.hero_width -1,temp_y+1);
+        const right_down_point = new Point(temp_x + this.hero_width -1,temp_y + this.hero_height -1);
+        //const center_point = this.center_point;
         const left_center = new Point(temp_x,temp_y + this.hero_height/2);
-        const right_center = new Point(temp_x + this.hero_wight, temp_y + this.hero_height/2);
-        const up_center = new Point(temp_x + this.hero_wight/2, temp_y);
-        const down_center = new Point(temp_x + this.hero_wight/2, temp_y + this.hero_height);
+        const right_center = new Point(temp_x + this.hero_width, temp_y + this.hero_height/2);
+        const up_center = new Point(temp_x + this.hero_width/2, temp_y);
+        const down_center = new Point(temp_x + this.hero_width/2, temp_y + this.hero_height);
 
-        let critical_points = [left_up_point,left_down_point,right_up_point,right_down_point,center_point,left_center,right_center,up_center,down_center];
+        let critical_points = [left_up_point,left_down_point,right_up_point,right_down_point,left_center,right_center,up_center,down_center];
 
 
         let get_chunk_from_point=(point)=>{
@@ -162,12 +162,12 @@ export default class Hero {
         let y_max = board.length * 32;
         let x_max = board[0].length * 32;
 
-        return (temp_x >= 0 && temp_x + this.hero_wight <= x_max) && (temp_y >= 0 && temp_y + this.hero_height <= y_max);
+        return (temp_x >= 0 && temp_x + this.hero_width <= x_max) && (temp_y >= 0 && temp_y + this.hero_height <= y_max);
     }
 
     check_point_collisoion(point) //check if point is inside
     {
-        return (point.x > this.x_position && point.x < this.x_position+this.hero_wight) && (point.y > this.y_position && point.y < this.y_position+this.hero_height)
+        return (point.x > this.x_position && point.x < this.x_position+this.hero_width) && (point.y > this.y_position && point.y < this.y_position+this.hero_height)
     }
 
 }

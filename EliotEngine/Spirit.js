@@ -2,9 +2,9 @@ import Hero from './Hero.js';
 import consts from "./consts.js";
 
 export default class Spirit extends Hero {
-    constructor(texture,hero_wight,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
+    constructor(texture,hero_width,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
     {
-        super(texture,hero_wight,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points);
+        super(texture,hero_width,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points);
         this.journey_lenght =0;
 
         this.rotation = consts.DOWN_ROTATION;
@@ -56,7 +56,7 @@ export default class Spirit extends Hero {
             if(!this.check_hero_collision(board,spirits,temp_x_position,temp_y_position)){
                 this.x_position = temp_x_position;
                 this.y_position = temp_y_position;
-                this.center_point.x = this.x_position + this.hero_wight/2;
+                this.center_point.x = this.x_position + this.hero_width/2;
                 this.center_point.y = this.y_position + this.hero_height/2;
 
             }else
