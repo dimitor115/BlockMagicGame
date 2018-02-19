@@ -120,7 +120,12 @@ export default class Hero {
         const right_up_point = new Point(temp_x + this.hero_wight -1,temp_y+1);
         const right_down_point = new Point(temp_x + this.hero_wight -1,temp_y + this.hero_height -1);
         const center_point = this.center_point;
-        let critical_points = [left_up_point,left_down_point,right_up_point,right_down_point,center_point];
+        const left_center = new Point(temp_x,temp_y + this.hero_height/2);
+        const right_center = new Point(temp_x + this.hero_wight, temp_y + this.hero_height/2);
+        const up_center = new Point(temp_x + this.hero_wight/2, temp_y);
+        const down_center = new Point(temp_x + this.hero_wight/2, temp_y + this.hero_height);
+
+        let critical_points = [left_up_point,left_down_point,right_up_point,right_down_point,center_point,left_center,right_center,up_center,down_center];
 
 
         let get_chunk_from_point=(point)=>{
