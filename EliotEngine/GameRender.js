@@ -1,3 +1,5 @@
+import consts from "./consts.js";
+
 export default class GameRender{
     constructor(canvas_width,canvas_height)
     {
@@ -30,11 +32,16 @@ export default class GameRender{
     render_bullets(bullet)
     {
         this.Action_board.fillStyle = bullet.color;
-        this.Action_board.fillRect(bullet.x_position, bullet.y_position, bullet.BULLET_WIDTH, bullet.BULLET_HIGHT);
-    }
-
-    static test()
-    {
-        console.log(this.CANVAS_HEIGHT);
+        let width,height;
+        if(bullet.rotation===consts.RIGHT_ROTATION || bullet.rotation === consts.LEFT_ROTATION)
+        {
+            width = bullet.BULLET_HEIGHT;
+            height = bullet.BULLET_WIDTH;
+        }else
+        {
+            width = bullet.BULLET_WIDTH;
+            height = bullet.BULLET_HEIGHT;
+        }
+        this.Action_board.fillRect(bullet.x_position, bullet.y_position, width, height);
     }
 }

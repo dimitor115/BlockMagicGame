@@ -5,7 +5,7 @@ import Point from "./Point.js";
 export class Bullet {
     constructor(x_position, y_position, color, speed,rotation) {
         this.BULLET_WIDTH = 6;
-        this.BULLET_HIGHT = 10;
+        this.BULLET_HEIGHT = 10;
 
         this.x_position = x_position;
         this.y_position = y_position;
