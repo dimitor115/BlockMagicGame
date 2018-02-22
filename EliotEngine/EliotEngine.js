@@ -37,7 +37,7 @@ export default class EliotEngine {
         let fire_gun = new FireGun('red',24);
         let image = new Image();
         image.src = `${img_path}${img}`;
-        this.hero = new Hero(image,wight,height,96,96,shift,fire_gun);
+        this.hero = new Hero(0,image,wight,height,96,96,shift,fire_gun);
         // console.log(this.hero);
     }
 

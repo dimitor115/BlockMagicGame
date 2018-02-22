@@ -4,7 +4,7 @@ import consts from './consts.js';
 import Point from './Point.js';
 
 export default class Hero {
-    constructor(texture,hero_width,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
+    constructor(id,texture,hero_width,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
     {
 
         this.texture = texture;
@@ -18,6 +18,7 @@ export default class Hero {
         this.life_points = life_points;
         this.rotation= consts.UP_ROTATION;
         this.backpack_blocks =0;
+        this.ID = id;
     }
 
     add_block_to_backpack()
@@ -123,17 +124,17 @@ export default class Hero {
 
     check_hero_collision(board,spirits,temp_x, temp_y)
     {
-
+        //TU WSZĘDZIE SĄ WSPÓŁRZĘDNE O JEDEN ŻEBY NIE BRAŁO KLOCKA DLA WSPÓLNYCH WSPÓŁRZĘDNYCH 
 
         const left_up_point = new Point(temp_x+1,temp_y+1);
         const left_down_point = new Point(temp_x+1,temp_y+this.hero_height-1);
         const right_up_point = new Point(temp_x + this.hero_width -1,temp_y+1);
         const right_down_point = new Point(temp_x + this.hero_width -1,temp_y + this.hero_height -1);
         //const center_point = this.center_point;
-        const left_center = new Point(temp_x,temp_y + this.hero_height/2);
-        const right_center = new Point(temp_x + this.hero_width, temp_y + this.hero_height/2);
-        const up_center = new Point(temp_x + this.hero_width/2, temp_y);
-        const down_center = new Point(temp_x + this.hero_width/2, temp_y + this.hero_height);
+        const left_center = new Point(temp_x +1,temp_y + this.hero_height/2);
+        const right_center = new Point(temp_x + this.hero_width -1, temp_y + this.hero_height/2);
+        const up_center = new Point(temp_x + this.hero_width/2, temp_y+1);
+        const down_center = new Point(temp_x + this.hero_width/2, temp_y + this.hero_height -1);
 
         let critical_points = [left_up_point,left_down_point,right_up_point,right_down_point,left_center,right_center,up_center,down_center];
 
