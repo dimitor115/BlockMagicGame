@@ -24,6 +24,7 @@ export default class Hero {
     add_block_to_backpack()
     {
         this.backpack_blocks++;
+        console.log(this.ID + "add, acctual :" + this.backpack_blocks)
     }
 
     check_rotation()
@@ -43,7 +44,10 @@ export default class Hero {
 
     update_fire_gun(render,board,destroy,spirits)
     {
-        this.fire_gun.update_bullets(render,board,destroy,spirits);
+        let add_to_backpack = () => {
+            this.add_block_to_backpack();
+        }
+        this.fire_gun.update_bullets(render,board,destroy,add_to_backpack,spirits);
     }
 
     check_if_fire()
@@ -130,14 +134,12 @@ export default class Hero {
         const left_down_point = new Point(temp_x+1,temp_y+this.hero_height-1);
         const right_up_point = new Point(temp_x + this.hero_width -1,temp_y+1);
         const right_down_point = new Point(temp_x + this.hero_width -1,temp_y + this.hero_height -1);
-        //const center_point = this.center_point;
         const left_center = new Point(temp_x +1,temp_y + this.hero_height/2);
         const right_center = new Point(temp_x + this.hero_width -1, temp_y + this.hero_height/2);
         const up_center = new Point(temp_x + this.hero_width/2, temp_y+1);
         const down_center = new Point(temp_x + this.hero_width/2, temp_y + this.hero_height -1);
 
         let critical_points = [left_up_point,left_down_point,right_up_point,right_down_point,left_center,right_center,up_center,down_center];
-
 
         let get_chunk_from_point=(point)=>{
             let m = point.x / 32;
@@ -155,7 +157,7 @@ export default class Hero {
                     return true;
             }
 
-    };
+        };
 
         for(let i=0; i<critical_points.length; i++)
         {

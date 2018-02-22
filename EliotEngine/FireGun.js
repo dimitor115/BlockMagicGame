@@ -12,7 +12,7 @@ export class Bullet {
         this.color = color;
         this.speed = speed;
         this.disappear = false;
-
+        
         this.rotation = rotation;
 
     }
@@ -30,7 +30,7 @@ export class Bullet {
         }
     }
 
-    check_bullet_collision(board, destroy) {
+    check_bullet_collision(board, destroy,add_to_backpack) {
 
         let m = this.y_position / 32;
         m = Math.floor(m);
@@ -51,7 +51,13 @@ export class Bullet {
 
             if (chunk.collison === 2) {
                 destroy(chunk);
-                this.disappear = true;
+
+                //wiem, że go trafiłem i jeśli ma tylko jedno życie to dodaje go do plecaka
+                //DO REFRACTORA
+                if(chunk.life_points <=1)
+                    add_to_backpack();
+                
+                    this.disappear = true;
             }
 
         }
@@ -82,18 +88,16 @@ export default class FireGun {
 
     fire_bullet(point,rotation) {
         let bullet = new Bullet(point.x, point.y, this.color, this.speed,rotation);
-        this
-            .bullets
-            .push(bullet);
+        this.bullets.push(bullet);
     }
 
-    update_bullets(render, board, destroy,spirits) {
+    update_bullets(render, board, destroy,add_to_backpack, spirits) {
 
         let new_bullets = [];
         for (let i = 0; i < this.bullets.length; i++) {
 
             let bullet = this.bullets[i];
-            bullet.check_bullet_collision(board, destroy);
+            bullet.check_bullet_collision(board, destroy,add_to_backpack);
             bullet.check_bullet_spirits_collision(spirits);
 
             if (!bullet.disappear) {
