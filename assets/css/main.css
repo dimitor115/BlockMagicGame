@@ -21,7 +21,13 @@ body {
     top: 0;
 }
 
+
 /*#ui-layer { z-index: 3 }*/
+
+#gui-layer{
+    width: 1600px;
+    z-index: 3
+}
 
 #game-layer {
     z-index: 2

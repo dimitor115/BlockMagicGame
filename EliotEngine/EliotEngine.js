@@ -4,6 +4,7 @@ import Spirits from './Spirits.js';
 import GameRender from './GameRender.js';
 import Chunk from './Chunk.js';
 import Board from './Board.js';
+import Gui from './Gui.js';
 
 const img_path = 'assets/img/';
 
@@ -22,6 +23,9 @@ export default class EliotEngine {
         this.hero_chunk = null;
 
         this.game_render = new GameRender(this.CHUNK_IN_X,this.CHUNK_IN_Y);
+        this.Gui = new Gui(this.CANVAS_WIGTH,this.CANVAS_HEIGHT,160);
+
+        this.Score =0;
     }
 
     start_engine() {
@@ -30,6 +34,7 @@ export default class EliotEngine {
         this.game_render.render_spirits(this.spirits_manager.spirits);
 
         engine_start = true;
+        this.Gui.update_score(this.Score);
 
     }
 
@@ -38,7 +43,6 @@ export default class EliotEngine {
         let image = new Image();
         image.src = `${img_path}${img}`;
         this.hero = new Hero(0,image,wight,height,96,96,shift,fire_gun);
-        // console.log(this.hero);
     }
 
     load_spirit(img,width,height,shift)
@@ -108,9 +112,13 @@ export default class EliotEngine {
             this.hero.update_fire_gun(render_bullet,this.Board.Board,destroy_block,spirits);
         };
 
+        
+
         let spirit = () => {
-           // this.spirits_manager.move_spirits(this.Board.Board);
-            this.spirits_manager.update_spirits(this.Board.Board,spirits);
+            const score_update = this.spirits_manager.update_spirits(this.Board.Board,spirits);
+            this.Score+=score_update;
+            if(score_update>0){ this.Gui.update_score(this.Score);}
+
             this.spirits_manager.fire_fireGun(render_bullet,this.Board.Board,destroy_block,spirits);
             this.game_render.render_spirits(this.spirits_manager.spirits);
         };

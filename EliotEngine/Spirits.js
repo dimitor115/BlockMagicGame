@@ -35,7 +35,7 @@ export default class Spirits{
     update_spirits(board,spirits){
 
         let updated_spirits = [];
-
+        let temp_score =0;
         for(let i=0; i<this.spirits.length; i++)
         {
 
@@ -45,13 +45,14 @@ export default class Spirits{
                 updated_spirits.push(spirit);
 
             }else{
-                //tu można jakoś usuwać
+                temp_score++;
             }
 
         }
 
-       // delete this.spirits;
+       //delete this.spirits;
         this.spirits = updated_spirits;
+        return temp_score;
     }
 
     move_spirits(board)
