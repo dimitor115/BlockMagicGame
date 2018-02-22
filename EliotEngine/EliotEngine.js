@@ -4,7 +4,6 @@ import Spirits from './Spirits.js';
 import GameRender from './GameRender.js';
 import Chunk from './Chunk.js';
 import Board from './Board.js';
-import map from './map_temp.js';
 
 const img_path = 'assets/img/';
 
@@ -15,8 +14,8 @@ export default class EliotEngine {
         this.CANVAS_HEIGHT = canvas_height;
         this.CHUNK_SIZE = chunk_size;
 
-        this.CHUNK_IN_Y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
-        this.CHUNK_IN_X = this.CANVAS_WIGTH/this.CHUNK_SIZE;
+        this.CHUNK_IN_Y = this.CANVAS_HEIGHT/this.CHUNK_SIZE; //ile chunkow pionowo
+        this.CHUNK_IN_X = this.CANVAS_WIGTH/this.CHUNK_SIZE; // ile chunków poziomo
 
         this.Board = null;
         this.hero = null;
@@ -98,7 +97,7 @@ export default class EliotEngine {
         };
         let render_bullet =(bullet)=>{this.game_render.render_bullets(bullet);};
 
-        let destroy_block =(chunk)=>{this.Board.add_to_destroy(chunk); this.hero.add_block_to_backpack();};
+        let destroy_block =(chunk)=>{this.Board.add_to_destroy(chunk);};
 
 
 
@@ -137,6 +136,7 @@ export default class EliotEngine {
             {
                 update_spirits_array();
                 hero_move();
+
                 hero_render();
                 spirit();
                 board();
@@ -170,11 +170,34 @@ export default class EliotEngine {
         return texture_pack;
     }
 
+    generate_map(){
+        let map = new Array(this.CHUNK_IN_Y);
+
+
+        for(let i=0; i<this.CHUNK_IN_Y; i++) {
+            let one_level = new Array(this.CHUNK_IN_X);
+            for (let j = 0; j < this.CHUNK_IN_X; j++)
+            {
+                if(i>this.CHUNK_IN_Y * 0.75)
+                {
+                    let temp = Math.floor((Math.random() * 100) + 1);
+                    if(temp < 25)
+                        one_level[j] = 2;
+                    else
+                        one_level[j] =0;
+                }else
+                    one_level[j] = 0;
+            }
+            map[i] = one_level;
+        }
+        return map;
+    }
+
     generate_board(texture_pack){
         const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
         const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
         const chunk_life_points = 5;
-
+        const map = this.generate_map();
 
         let board = new Array(chunk_in_y);
 
@@ -185,8 +208,8 @@ export default class EliotEngine {
             let x_position = 0;
             for(let j=0; j<chunk_in_x; j++)
             {
-                //let x = map[i][j];
-                let x = 0;
+                let x = map[i][j];
+                //let x =0;
                 let texture = texture_pack[x];
                 one_level[j] = new Chunk(texture,x,x_position,y_position,this.CHUNK_SIZE,chunk_life_points);
 

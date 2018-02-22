@@ -9,11 +9,6 @@ export default class GameRender{
         this.CANVAS_HEIGHT = canvas_height;
     }
 
-    render_action_board()
-    {
-        //this.Action_board.clearRect(0,0,this.CANVAS_WIDTH,this.CANVAS_HEIGHT); //clear all action board
-    }
-
     render_hero(hero)
     {
 

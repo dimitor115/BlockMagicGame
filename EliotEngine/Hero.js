@@ -160,7 +160,7 @@ export default class Hero {
         {
             let critical_point = critical_points[i];
             let chunk = get_chunk_from_point(critical_point);
-            if(chunk.collison>0 || check_collision_with_spirits(critical_point)) //check if any of chunks that hero will be, has collision >0
+            if(chunk!== undefined && ( chunk.collison>0 || check_collision_with_spirits(critical_point))) //check if any of chunks that hero will be, has collision >0
                 return true;
 
         }
