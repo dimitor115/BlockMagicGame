@@ -11,13 +11,13 @@ export default class Spirits{
         this.spirits = [];
     }
 
-    fire_fireGun(render,board,destory,spirits)
+    fire_fireGun(render,board,destroy,spirits)
     {
         for(let i=0; i<this.spirits.length; i++)
         {
             let spirit = this.spirits[i];
             spirit.check_if_fire();
-            spirit.update_fire_gun(render,board,destory,spirits);
+            spirit.update_fire_gun(render,board,destroy,spirits);
         }
     }
 

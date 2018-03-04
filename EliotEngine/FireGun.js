@@ -23,9 +23,9 @@ export class Bullet {
         {
             let spirit = spirits[i];
             let center_point = new Point(this.x_position+this.BULLET_WIDTH/2,this.y_position);
-            if(spirit.check_point_collisoion(center_point))
+            if(spirit.check_point_collision(center_point))
             {
-                spirit.mark_as_shoted();
+                spirit.mark_as_shotted();
             }
         }
     }
@@ -46,10 +46,10 @@ export class Bullet {
         {
             let chunk = board[m][n];
 
-            if (chunk.collison === 1)
+            if (chunk.collision === 1)
                 this.disappear = true;
 
-            if (chunk.collison === 2) {
+            if (chunk.collision === 2) {
                 destroy(chunk);
 
                 //wiem, że go trafiłem i jeśli ma tylko jedno życie to dodaje go do plecaka

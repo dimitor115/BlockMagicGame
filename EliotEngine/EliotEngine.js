@@ -10,20 +10,20 @@ const img_path = 'assets/img/';
 
 
 export default class EliotEngine {
-    constructor(canvas_wight, canvas_height, chunk_size) {
-        this.CANVAS_WIGTH = canvas_wight;
+    constructor(canvas_width, canvas_height, chunk_size) {
+        this.CANVAS_WIDTH = canvas_width;
         this.CANVAS_HEIGHT = canvas_height;
         this.CHUNK_SIZE = chunk_size;
 
         this.CHUNK_IN_Y = this.CANVAS_HEIGHT/this.CHUNK_SIZE; //ile chunkow pionowo
-        this.CHUNK_IN_X = this.CANVAS_WIGTH/this.CHUNK_SIZE; // ile chunków poziomo
+        this.CHUNK_IN_X = this.CANVAS_WIDTH/this.CHUNK_SIZE; // ile chunków poziomo
 
         this.Board = null;
         this.hero = null;
         this.hero_chunk = null;
 
         this.game_render = new GameRender(this.CHUNK_IN_X,this.CHUNK_IN_Y);
-        this.Gui = new Gui(this.CANVAS_WIGTH,this.CANVAS_HEIGHT,160);
+        this.Gui = new Gui(this.CANVAS_WIDTH,this.CANVAS_HEIGHT,160);
 
         this.Score =0;
     }
@@ -38,11 +38,11 @@ export default class EliotEngine {
 
     }
 
-    load_hero(img,wight,height,shift) {
+    load_hero(img,width,height,shift) {
         let fire_gun = new FireGun('red',24);
         let image = new Image();
         image.src = `${img_path}${img}`;
-        this.hero = new Hero(0,image,wight,height,96,96,shift,fire_gun);
+        this.hero = new Hero(0,image,width,height,96,96,shift,fire_gun);
     }
 
     load_spirit(img,width,height,shift)
@@ -62,7 +62,7 @@ export default class EliotEngine {
         let board = this.generate_board(texture_pack);
 
         const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
-        const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
+        const chunk_in_x = this.CANVAS_WIDTH/this.CHUNK_SIZE;
         this.Board = new Board(board,chunk_in_x,chunk_in_y,this.CHUNK_SIZE,texture_pack);
 
 
@@ -106,7 +106,7 @@ export default class EliotEngine {
 
 
         let hero_render = () => {
-            this.game_render.Action_board.clearRect(0,0,this.CANVAS_WIGTH,this.CANVAS_HEIGHT); //clear all action board CZEMU ?!
+            this.game_render.Action_board.clearRect(0,0,this.CANVAS_WIDTH,this.CANVAS_HEIGHT); //clear all action board CZEMU ?!
             this.game_render.render_hero(this.hero);
 
             this.hero.update_fire_gun(render_bullet,this.Board.Board,destroy_block,spirits);
@@ -203,7 +203,7 @@ export default class EliotEngine {
 
     generate_board(texture_pack){
         const chunk_in_y = this.CANVAS_HEIGHT/this.CHUNK_SIZE;
-        const chunk_in_x = this.CANVAS_WIGTH/this.CHUNK_SIZE;
+        const chunk_in_x = this.CANVAS_WIDTH/this.CHUNK_SIZE;
         const chunk_life_points = 5;
         const map = this.generate_map();
 

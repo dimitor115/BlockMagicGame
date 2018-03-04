@@ -24,7 +24,7 @@ export default class Hero {
     add_block_to_backpack()
     {
         this.backpack_blocks++;
-        console.log(this.ID + "add, acctual :" + this.backpack_blocks)
+        console.log(this.ID + "add, actual :" + this.backpack_blocks)
     }
 
     check_rotation()
@@ -88,7 +88,7 @@ export default class Hero {
         }
     }
 
-    mark_as_shoted()
+    mark_as_shotted()
     {
         this.life_points--;
         console.log("trafimy :C");
@@ -153,7 +153,7 @@ export default class Hero {
             for(let j=0; j<spirits.length; j++)
             {
                 let spirit = spirits[j];
-                if(spirit !== this && spirit.check_point_collisoion(critical_point))
+                if(spirit !== this && spirit.check_point_collision(critical_point))
                     return true;
             }
 
@@ -163,7 +163,7 @@ export default class Hero {
         {
             let critical_point = critical_points[i];
             let chunk = get_chunk_from_point(critical_point);
-            if(chunk!== undefined && ( chunk.collison>0 || check_collision_with_spirits(critical_point))) //check if any of chunks that hero will be, has collision >0
+            if(chunk!== undefined && ( chunk.collision>0 || check_collision_with_spirits(critical_point))) //check if any of chunks that hero will be, has collision >0
                 return true;
 
         }
@@ -178,7 +178,7 @@ export default class Hero {
         return (temp_x >= 0 && temp_x + this.hero_width <= x_max) && (temp_y >= 0 && temp_y + this.hero_height <= y_max);
     }
 
-    check_point_collisoion(point) //check if point is inside
+    check_point_collision(point) //check if point is inside
     {
         return (point.x > this.x_position && point.x < this.x_position+this.hero_width) && (point.y > this.y_position && point.y < this.y_position+this.hero_height)
     }

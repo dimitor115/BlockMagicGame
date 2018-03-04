@@ -5,7 +5,7 @@ export default class Spirit extends Hero {
     constructor(id,texture,hero_width,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points)
     {
         super(id,texture,hero_width,hero_height,x_position,y_position,shift_quantity,fire_gun,life_points);
-        this.journey_lenght =0;
+        this.journey_length =0;
 
         this.rotation = consts.DOWN_ROTATION;
     }
@@ -24,10 +24,10 @@ export default class Spirit extends Hero {
         let temp_y_position = this.y_position;
 
 
-        if(this.journey_lenght<=0)
+        if(this.journey_length<=0)
         {
             let move = Math.floor((Math.random() * 100) + 1);
-            this.journey_lenght = Math.floor((Math.random() * 60) + 10);
+            this.journey_length = Math.floor((Math.random() * 60) + 10);
             if(move<35)
             {
                 this.direction = {x:+this.shift_quantity,y:-this.shift_quantity};
@@ -50,7 +50,7 @@ export default class Spirit extends Hero {
 
             temp_x_position+= this.direction.x;
             temp_y_position+= this.direction.y;
-            this.journey_lenght--;
+            this.journey_length--;
 
         if(this.check_board_border_collision(board,temp_x_position,temp_y_position)) {
             if(!this.check_hero_collision(board,spirits,temp_x_position,temp_y_position)){
@@ -60,10 +60,10 @@ export default class Spirit extends Hero {
                 this.center_point.y = this.y_position + this.hero_height/2;
 
             }else
-                this.journey_lenght=0;
+                this.journey_length=0;
         }
         else
-            this.journey_lenght=0;
+            this.journey_length=0;
 
 
 

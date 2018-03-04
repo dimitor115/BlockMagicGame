@@ -15,7 +15,7 @@ export default class Board {
         const bg = document.getElementById("background-layer");
         this.background = bg.getContext("2d");
         console.log(bg);
-        this.block_to_destory = [];
+        this.block_to_destroy = [];
     }
 
     draw_chunk(chunk) {
@@ -61,7 +61,7 @@ export default class Board {
         }
 
 
-        if (chunk.collison === 0) {
+        if (chunk.collision === 0) {
             chunk.change_to(this.Texture_pack[2], 2);
             this.draw_chunk(chunk);
         }
@@ -70,15 +70,15 @@ export default class Board {
 
     add_to_destroy(chunk) {
         this
-            .block_to_destory
+            .block_to_destroy
             .push(chunk);
     }
 
     update_board() {
-        for (let i = 0; i < this.block_to_destory.length; i++) {
-            let chunk = this.block_to_destory[i];
+        for (let i = 0; i < this.block_to_destroy.length; i++) {
+            let chunk = this.block_to_destroy[i];
             
-            chunk.mark_as_hited();
+            chunk.mark_as_hit();
 
             if(chunk.life_points<=0)
             {
@@ -87,6 +87,6 @@ export default class Board {
             }
         }
 
-        this.block_to_destory = new Array(0);
+        this.block_to_destroy = new Array(0);
     }
 }
