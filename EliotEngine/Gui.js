@@ -17,5 +17,21 @@ export default class Gui{
         this.Gui.fillText(score,this.BORD_WIDTH + 10,40);
     }
 
+    temp_start_info()
+    {
+        const text = `
+            Witaj! \n
+            Gra którą zaraz zobaczysz, jest jedynie prostą i jeszcze nie dokończoną demonstracją różnych funkcji autorskiego slinika do gier 2d o nazwie "EliotEngine"
+            \n sterowanie : \n
+            WSAD - poruszanie się po planszy \n
+            Spacja - strzelanie \n
+            Enter - budowanie klocków \n
+            L - obracanie kierunku strzelania \n
+            Możesz strzelać do fioletowych klocków, jeśli trafisz w jednen klika razy to zostanie on zburzony i będziesz mógł postawić jednen klocek gdzie będziesz chciał \n
+            możesz również strzelać w stronę czerwonych stworków, kilka trafień gwarantuje jego zabicie i zdobycie punktu.
+        `;
+        alert(text);
+    }
+
 
 }

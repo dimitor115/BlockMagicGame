@@ -30,9 +30,9 @@ export default class EliotEngine {
 
     start_engine() {
         this.Board.draw_board();
+        this.Gui.temp_start_info();
         this.game_render.render_hero(this.hero);
         this.game_render.render_spirits(this.spirits_manager.spirits);
-
         engine_start = true;
         this.Gui.update_score(this.Score);
 
